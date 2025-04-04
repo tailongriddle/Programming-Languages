@@ -1,6 +1,0 @@
-pandas.DataFrame.\_\_dataframe\_\_
-==================================
-
-.. currentmodule:: pandas
-
-.. automethod:: DataFrame.__dataframe__

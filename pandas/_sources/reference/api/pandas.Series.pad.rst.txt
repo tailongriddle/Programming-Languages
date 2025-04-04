@@ -1,6 +1,0 @@
-pandas.Series.pad
-=================
-
-.. currentmodule:: pandas
-
-.. automethod:: Series.pad

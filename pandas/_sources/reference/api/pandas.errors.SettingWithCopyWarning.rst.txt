@@ -1,6 +1,0 @@
-pandas.errors.SettingWithCopyWarning
-====================================
-
-.. currentmodule:: pandas.errors
-
-.. autoexception:: SettingWithCopyWarning

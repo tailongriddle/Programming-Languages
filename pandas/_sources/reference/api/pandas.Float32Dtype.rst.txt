@@ -1,6 +1,0 @@
-pandas.Float32Dtype
-===================
-
-.. currentmodule:: pandas
-
-.. autoclass:: Float32Dtype

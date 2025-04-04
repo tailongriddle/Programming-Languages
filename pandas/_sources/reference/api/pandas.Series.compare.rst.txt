@@ -1,6 +1,0 @@
-pandas.Series.compare
-=====================
-
-.. currentmodule:: pandas
-
-.. automethod:: Series.compare

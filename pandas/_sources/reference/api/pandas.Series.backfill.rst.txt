@@ -1,6 +1,0 @@
-pandas.Series.backfill
-======================
-
-.. currentmodule:: pandas
-
-.. automethod:: Series.backfill

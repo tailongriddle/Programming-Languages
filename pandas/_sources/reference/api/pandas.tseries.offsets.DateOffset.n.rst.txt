@@ -1,6 +1,0 @@
-pandas.tseries.offsets.DateOffset.n
-===================================
-
-.. currentmodule:: pandas.tseries.offsets
-
-.. autoattribute:: DateOffset.n

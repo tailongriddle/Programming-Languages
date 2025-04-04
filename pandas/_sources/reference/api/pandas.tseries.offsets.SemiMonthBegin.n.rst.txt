@@ -1,6 +1,0 @@
-pandas.tseries.offsets.SemiMonthBegin.n
-=======================================
-
-.. currentmodule:: pandas.tseries.offsets
-
-.. autoattribute:: SemiMonthBegin.n

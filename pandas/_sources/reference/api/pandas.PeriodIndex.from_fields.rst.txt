@@ -1,6 +1,0 @@
-pandas.PeriodIndex.from\_fields
-===============================
-
-.. currentmodule:: pandas
-
-.. automethod:: PeriodIndex.from_fields

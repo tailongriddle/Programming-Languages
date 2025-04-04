@@ -1,6 +1,0 @@
-pandas.errors.IndexingError
-===========================
-
-.. currentmodule:: pandas.errors
-
-.. autoexception:: IndexingError

@@ -1,6 +1,0 @@
-pandas.errors.InvalidIndexError
-===============================
-
-.. currentmodule:: pandas.errors
-
-.. autoexception:: InvalidIndexError

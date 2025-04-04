@@ -1,6 +1,0 @@
-pandas.show\_versions
-=====================
-
-.. currentmodule:: pandas
-
-.. autofunction:: show_versions

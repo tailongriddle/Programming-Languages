@@ -1,6 +1,0 @@
-pandas.core.groupby.DataFrameGroupBy.prod
-=========================================
-
-.. currentmodule:: pandas.core.groupby
-
-.. automethod:: DataFrameGroupBy.prod

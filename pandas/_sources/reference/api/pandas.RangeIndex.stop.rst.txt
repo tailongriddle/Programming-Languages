@@ -1,6 +1,0 @@
-pandas.RangeIndex.stop
-======================
-
-.. currentmodule:: pandas
-
-.. autoproperty:: RangeIndex.stop

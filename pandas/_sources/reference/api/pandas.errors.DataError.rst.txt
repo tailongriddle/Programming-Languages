@@ -1,6 +1,0 @@
-pandas.errors.DataError
-=======================
-
-.. currentmodule:: pandas.errors
-
-.. autoexception:: DataError

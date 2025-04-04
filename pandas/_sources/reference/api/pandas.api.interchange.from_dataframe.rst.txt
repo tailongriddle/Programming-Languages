@@ -1,6 +1,0 @@
-pandas.api.interchange.from\_dataframe
-======================================
-
-.. currentmodule:: pandas.api.interchange
-
-.. autofunction:: from_dataframe

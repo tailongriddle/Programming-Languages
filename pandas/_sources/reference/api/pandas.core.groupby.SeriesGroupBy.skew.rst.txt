@@ -1,6 +1,0 @@
-pandas.core.groupby.SeriesGroupBy.skew
-======================================
-
-.. currentmodule:: pandas.core.groupby
-
-.. automethod:: SeriesGroupBy.skew

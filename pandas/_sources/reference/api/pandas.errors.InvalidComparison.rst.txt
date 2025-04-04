@@ -1,6 +1,0 @@
-pandas.errors.InvalidComparison
-===============================
-
-.. currentmodule:: pandas.errors
-
-.. autoexception:: InvalidComparison
