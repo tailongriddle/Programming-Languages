@@ -1,0 +1,56 @@
+pandas.api.extensions.ExtensionDtype
+====================================
+
+.. currentmodule:: pandas.api.extensions
+
+.. autoclass:: ExtensionDtype
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~ExtensionDtype.index_class
+      
+      
+        ~ExtensionDtype.kind
+      
+      
+        ~ExtensionDtype.na_value
+      
+      
+        ~ExtensionDtype.name
+      
+      
+        ~ExtensionDtype.names
+      
+      
+        ~ExtensionDtype.type
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~ExtensionDtype.construct_array_type
+      
+      
+        ~ExtensionDtype.construct_from_string
+      
+      
+        ~ExtensionDtype.empty
+      
+      
+        ~ExtensionDtype.is_dtype
+      
+   
+   

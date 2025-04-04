@@ -1,0 +1,5 @@
+gym==0.26.2
+ale-py
+numpy==1.26.4
+torch==2.5.1
+opencv-python==4.10.0.84

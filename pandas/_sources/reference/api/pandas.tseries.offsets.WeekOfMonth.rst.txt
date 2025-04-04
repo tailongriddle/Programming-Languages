@@ -1,0 +1,89 @@
+pandas.tseries.offsets.WeekOfMonth
+==================================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: WeekOfMonth
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~WeekOfMonth.base
+      
+      
+        ~WeekOfMonth.freqstr
+      
+      
+        ~WeekOfMonth.kwds
+      
+      
+        ~WeekOfMonth.n
+      
+      
+        ~WeekOfMonth.name
+      
+      
+        ~WeekOfMonth.nanos
+      
+      
+        ~WeekOfMonth.normalize
+      
+      
+        ~WeekOfMonth.rule_code
+      
+      
+        ~WeekOfMonth.week
+      
+      
+        ~WeekOfMonth.weekday
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~WeekOfMonth.copy
+      
+      
+        ~WeekOfMonth.is_anchored
+      
+      
+        ~WeekOfMonth.is_month_end
+      
+      
+        ~WeekOfMonth.is_month_start
+      
+      
+        ~WeekOfMonth.is_on_offset
+      
+      
+        ~WeekOfMonth.is_quarter_end
+      
+      
+        ~WeekOfMonth.is_quarter_start
+      
+      
+        ~WeekOfMonth.is_year_end
+      
+      
+        ~WeekOfMonth.is_year_start
+      
+      
+        ~WeekOfMonth.rollback
+      
+      
+        ~WeekOfMonth.rollforward
+      
+   
+   

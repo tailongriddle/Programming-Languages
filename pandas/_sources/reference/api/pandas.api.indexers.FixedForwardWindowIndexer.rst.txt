@@ -1,0 +1,24 @@
+pandas.api.indexers.FixedForwardWindowIndexer
+=============================================
+
+.. currentmodule:: pandas.api.indexers
+
+.. autoclass:: FixedForwardWindowIndexer
+
+   
+
+   
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~FixedForwardWindowIndexer.get_window_bounds
+      
+   
+   

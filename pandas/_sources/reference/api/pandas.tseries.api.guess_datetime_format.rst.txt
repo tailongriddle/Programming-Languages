@@ -1,0 +1,6 @@
+pandas.tseries.api.guess\_datetime\_format
+==========================================
+
+.. currentmodule:: pandas.tseries.api
+
+.. autofunction:: guess_datetime_format

@@ -1,0 +1,6 @@
+pandas.api.extensions.ExtensionArray.\_explode
+==============================================
+
+.. currentmodule:: pandas.api.extensions
+
+.. automethod:: ExtensionArray._explode

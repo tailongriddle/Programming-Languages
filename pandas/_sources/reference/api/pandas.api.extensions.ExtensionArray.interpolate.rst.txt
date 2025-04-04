@@ -1,0 +1,6 @@
+pandas.api.extensions.ExtensionArray.interpolate
+================================================
+
+.. currentmodule:: pandas.api.extensions
+
+.. automethod:: ExtensionArray.interpolate

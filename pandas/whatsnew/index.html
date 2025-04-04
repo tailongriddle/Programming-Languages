@@ -1,0 +1,1793 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Release notes &#8212; pandas 2.2.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css?v=150e0881" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css?v=b7db95b1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js?v=219dea72"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'whatsnew/index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.pydata.org/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.2';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="What’s new in 2.2.2 (April 10, 2024)" href="v2.2.2.html" />
+    <link rel="prev" title="Contributor community" href="../development/community.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.2.2 documentation - Home"/>
+    <script>document.write(`<img src="https://pandas.pydata.org/static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.2.2 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">
+                        Development
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Release notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">
+                        Development
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Release notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v2.2.2.html">What’s new in 2.2.2 (April 10, 2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.2.1.html">What’s new in 2.2.1 (February 22, 2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.2.0.html">What’s new in 2.2.0 (January 19, 2024)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v2.1.4.html">What’s new in 2.1.4 (December 8, 2023)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.3.html">What’s new in 2.1.3 (November 10, 2023)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.2.html">What’s new in 2.1.2 (October 26, 2023)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.1.html">What’s new in 2.1.1 (September 20, 2023)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.0.html">What’s new in 2.1.0 (Aug 30, 2023)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v2.0.3.html">What’s new in 2.0.3 (June 28, 2023)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.0.2.html">What’s new in 2.0.2 (May 29, 2023)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.0.1.html">What’s new in 2.0.1 (April 24, 2023)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.0.0.html">What’s new in 2.0.0 (April 3, 2023)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.5.3.html">What’s new in 1.5.3 (January 18, 2023)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.2.html">What’s new in 1.5.2 (November 21, 2022)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.1.html">What’s new in 1.5.1 (October 19, 2022)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.0.html">What’s new in 1.5.0 (September 19, 2022)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.4.4.html">What’s new in 1.4.4 (August 31, 2022)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.3.html">What’s new in 1.4.3 (June 23, 2022)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.2.html">What’s new in 1.4.2 (April 2, 2022)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.1.html">What’s new in 1.4.1 (February 12, 2022)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.0.html">What’s new in 1.4.0 (January 22, 2022)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.3.5.html">What’s new in 1.3.5 (December 12, 2021)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.4.html">What’s new in 1.3.4 (October 17, 2021)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.3.html">What’s new in 1.3.3 (September 12, 2021)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.2.html">What’s new in 1.3.2 (August 15, 2021)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.1.html">What’s new in 1.3.1 (July 25, 2021)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.0.html">What’s new in 1.3.0 (July 2, 2021)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.2.5.html">What’s new in 1.2.5 (June 22, 2021)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.4.html">What’s new in 1.2.4 (April 12, 2021)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.3.html">What’s new in 1.2.3 (March 02, 2021)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.2.html">What’s new in 1.2.2 (February 09, 2021)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.1.html">What’s new in 1.2.1 (January 20, 2021)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.0.html">What’s new in 1.2.0 (December 26, 2020)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.1.5.html">What’s new in 1.1.5 (December 07, 2020)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.4.html">What’s new in 1.1.4 (October 30, 2020)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.3.html">What’s new in 1.1.3 (October 5, 2020)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.2.html">What’s new in 1.1.2 (September 8, 2020)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.1.html">What’s new in 1.1.1 (August 20, 2020)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.0.html">What’s new in 1.1.0 (July 28, 2020)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.0.5.html">What’s new in 1.0.5 (June 17, 2020)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.4.html">What’s new in 1.0.4 (May 28, 2020)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.3.html">What’s new in 1.0.3 (March 17, 2020)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.2.html">What’s new in 1.0.2 (March 12, 2020)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.1.html">What’s new in 1.0.1 (February 5, 2020)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.0.html">What’s new in 1.0.0 (January 29, 2020)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.25.3.html">What’s new in 0.25.3 (October 31, 2019)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.25.2.html">What’s new in 0.25.2 (October 15, 2019)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.25.1.html">What’s new in 0.25.1 (August 21, 2019)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.25.0.html">What’s new in 0.25.0 (July 18, 2019)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.24.2.html">What’s new in 0.24.2 (March 12, 2019)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.24.1.html">What’s new in 0.24.1 (February 3, 2019)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.24.0.html">What’s new in 0.24.0 (January 25, 2019)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.23.4.html">What’s new in 0.23.4 (August 3, 2018)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.3.html">What’s new in 0.23.3 (July 7, 2018)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.2.html">What’s new in 0.23.2 (July 5, 2018)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.1.html">What’s new in 0.23.1 (June 12, 2018)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.0.html">What’s new in 0.23.0 (May 15, 2018)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.22.0.html">Version 0.22.0 (December 29, 2017)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.21.1.html">Version 0.21.1 (December 12, 2017)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.21.0.html">Version 0.21.0 (October 27, 2017)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.20.3.html">Version 0.20.3 (July 7, 2017)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.20.2.html">Version 0.20.2 (June 4, 2017)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.20.0.html">Version 0.20.1 (May 5, 2017)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.19.2.html">Version 0.19.2 (December 24, 2016)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.19.1.html">Version 0.19.1 (November 3, 2016)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.19.0.html">Version 0.19.0 (October 2, 2016)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.18.1.html">Version 0.18.1 (May 3, 2016)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.18.0.html">Version 0.18.0 (March 13, 2016)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.17.1.html">Version 0.17.1 (November 21, 2015)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.17.0.html">Version 0.17.0 (October 9, 2015)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.16.2.html">Version 0.16.2 (June 12, 2015)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.16.1.html">Version 0.16.1 (May 11, 2015)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.16.0.html">Version 0.16.0 (March 22, 2015)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.15.2.html">Version 0.15.2 (December 12, 2014)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.15.1.html">Version 0.15.1 (November 9, 2014)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.15.0.html">Version 0.15.0 (October 18, 2014)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.14.1.html">Version 0.14.1 (July 11, 2014)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.14.0.html">Version 0.14.0 (May 31 , 2014)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.13.1.html">Version 0.13.1 (February 3, 2014)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.13.0.html">Version 0.13.0 (January 3, 2014)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.12.0.html">Version 0.12.0 (July 24, 2013)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.11.0.html">Version 0.11.0 (April 22, 2013)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.10.1.html">Version 0.10.1 (January 22, 2013)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.10.0.html">Version 0.10.0 (December 17, 2012)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.9.1.html">Version 0.9.1 (November 14, 2012)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.9.0.html">Version 0.9.0 (October 7, 2012)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.8.1.html">Version 0.8.1 (July 22, 2012)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.8.0.html">Version 0.8.0 (June 29, 2012)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.7.3.html">Version 0.7.3 (April 12, 2012)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.7.2.html">Version 0.7.2 (March 16, 2012)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.7.1.html">Version 0.7.1 (February 29, 2012)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.7.0.html">Version 0.7.0 (February 9, 2012)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.6.1.html">Version 0.6.1 (December 13, 2011)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.6.0.html">Version 0.6.0 (November 25, 2011)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.5.0.html">Version 0.5.0 (October 24, 2011)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.4.x.html">Versions 0.4.1 through 0.4.3 (September 25 - October 9, 2011)</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Release notes</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="release-notes">
+<span id="release"></span><h1>Release notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h1>
+<p>This is the list of changes to pandas between each release. For full details,
+see the <a class="reference external" href="https://github.com/pandas-dev/pandas/commits/">commit logs</a>. For install and
+upgrade instructions, see <a class="reference internal" href="../getting_started/install.html#install"><span class="std std-ref">Installation</span></a>.</p>
+<section id="version-2-2">
+<h2>Version 2.2<a class="headerlink" href="#version-2-2" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v2.2.2.html">What’s new in 2.2.2 (April 10, 2024)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.2.html#pandas-2-2-2-is-now-compatible-with-numpy-2-0">Pandas 2.2.2 is now compatible with numpy 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.2.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.2.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v2.2.1.html">What’s new in 2.2.1 (February 22, 2024)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.1.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.1.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.1.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v2.2.0.html">What’s new in 2.2.0 (January 19, 2024)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.0.html#upcoming-changes-in-pandas-3-0">Upcoming changes in pandas 3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.0.html#notable-bug-fixes">Notable bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.2.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-2-1">
+<h2>Version 2.1<a class="headerlink" href="#version-2-1" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.4.html">What’s new in 2.1.4 (December 8, 2023)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.4.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.4.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.4.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.3.html">What’s new in 2.1.3 (November 10, 2023)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.3.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.3.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.3.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.2.html">What’s new in 2.1.2 (October 26, 2023)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.2.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.2.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.2.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.1.html">What’s new in 2.1.1 (September 20, 2023)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.1.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.1.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.0.html">What’s new in 2.1.0 (Aug 30, 2023)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.1.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-2-0">
+<h2>Version 2.0<a class="headerlink" href="#version-2-0" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v2.0.3.html">What’s new in 2.0.3 (June 28, 2023)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.3.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.3.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.3.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.3.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v2.0.2.html">What’s new in 2.0.2 (May 29, 2023)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.2.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.2.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v2.0.1.html">What’s new in 2.0.1 (April 24, 2023)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.1.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.1.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v2.0.0.html">What’s new in 2.0.0 (April 3, 2023)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.0.html#notable-bug-fixes">Notable bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.0.html#removal-of-prior-version-deprecations-changes">Removal of prior version deprecations/changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-1-5">
+<h2>Version 1.5<a class="headerlink" href="#version-1-5" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.3.html">What’s new in 1.5.3 (January 18, 2023)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.3.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.3.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.3.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.3.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.2.html">What’s new in 1.5.2 (November 21, 2022)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.2.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.2.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.1.html">What’s new in 1.5.1 (October 19, 2022)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.1.html#behavior-of-groupby-with-categorical-groupers-gh-48645">Behavior of <code class="docutils literal notranslate"><span class="pre">groupby</span></code> with categorical groupers (GH 48645)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.1.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.1.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.0.html">What’s new in 1.5.0 (September 19, 2022)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.0.html#notable-bug-fixes">Notable bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.5.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-1-4">
+<h2>Version 1.4<a class="headerlink" href="#version-1-4" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.4.html">What’s new in 1.4.4 (August 31, 2022)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.4.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.4.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.4.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.4.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.3.html">What’s new in 1.4.3 (June 23, 2022)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.3.html#behavior-of-concat-with-empty-or-all-na-dataframe-columns">Behavior of <code class="docutils literal notranslate"><span class="pre">concat</span></code> with empty or all-NA DataFrame columns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.3.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.3.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.3.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.3.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.2.html">What’s new in 1.4.2 (April 2, 2022)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.2.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.1.html">What’s new in 1.4.1 (February 12, 2022)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.1.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.1.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.0.html">What’s new in 1.4.0 (January 22, 2022)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.0.html#notable-bug-fixes">Notable bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.4.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-1-3">
+<h2>Version 1.3<a class="headerlink" href="#version-1-3" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.5.html">What’s new in 1.3.5 (December 12, 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.5.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.5.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.4.html">What’s new in 1.3.4 (October 17, 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.4.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.4.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.4.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.4.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.3.html">What’s new in 1.3.3 (September 12, 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.3.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.3.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.3.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.3.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.2.html">What’s new in 1.3.2 (August 15, 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.2.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.1.html">What’s new in 1.3.1 (July 25, 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.1.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.0.html">What’s new in 1.3.0 (July 2, 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.0.html#notable-bug-fixes">Notable bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.3.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-1-2">
+<h2>Version 1.2<a class="headerlink" href="#version-1-2" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.5.html">What’s new in 1.2.5 (June 22, 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.5.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.5.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.4.html">What’s new in 1.2.4 (April 12, 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.4.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.4.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.3.html">What’s new in 1.2.3 (March 02, 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.3.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.3.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.2.html">What’s new in 1.2.2 (February 09, 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.2.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.1.html">What’s new in 1.2.1 (January 20, 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.1.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.1.html#calling-numpy-ufuncs-on-non-aligned-dataframes">Calling NumPy ufuncs on non-aligned DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.1.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.0.html">What’s new in 1.2.0 (December 26, 2020)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.0.html#notable-bug-fixes">Notable bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.2.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-1-1">
+<h2>Version 1.1<a class="headerlink" href="#version-1-1" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.5.html">What’s new in 1.1.5 (December 07, 2020)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.5.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.5.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.5.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.5.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.4.html">What’s new in 1.1.4 (October 30, 2020)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.4.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.4.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.4.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.3.html">What’s new in 1.1.3 (October 5, 2020)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.3.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.3.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.3.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.3.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.3.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.2.html">What’s new in 1.1.2 (September 8, 2020)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.2.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.2.html#other">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.1.html">What’s new in 1.1.1 (August 20, 2020)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.1.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.0.html">What’s new in 1.1.0 (July 28, 2020)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.0.html#notable-bug-fixes">Notable bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.1.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-1-0">
+<h2>Version 1.0<a class="headerlink" href="#version-1-0" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.5.html">What’s new in 1.0.5 (June 17, 2020)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.5.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.5.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.5.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.4.html">What’s new in 1.0.4 (May 28, 2020)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.4.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.4.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.4.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.3.html">What’s new in 1.0.3 (March 17, 2020)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.3.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.3.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.3.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.2.html">What’s new in 1.0.2 (March 12, 2020)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.2.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.2.html#indexing-with-nullable-boolean-arrays">Indexing with nullable boolean arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.1.html">What’s new in 1.0.1 (February 5, 2020)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.1.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.1.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.0.html">What’s new in 1.0.0 (January 29, 2020)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.0.html#new-deprecation-policy">New deprecation policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.0.html#experimental-new-features">Experimental new features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.0.html#other-enhancements">Other enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.0.html#removal-of-prior-version-deprecations-changes">Removal of prior version deprecations/changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v1.0.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-25">
+<h2>Version 0.25<a class="headerlink" href="#version-0-25" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.25.3.html">What’s new in 0.25.3 (October 31, 2019)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.3.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.3.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.25.2.html">What’s new in 0.25.2 (October 15, 2019)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.25.1.html">What’s new in 0.25.1 (August 21, 2019)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.1.html#io-and-lzma">IO and LZMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.25.0.html">What’s new in 0.25.0 (July 18, 2019)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.0.html#removal-of-prior-version-deprecations-changes">Removal of prior version deprecations/changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.25.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-24">
+<h2>Version 0.24<a class="headerlink" href="#version-0-24" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.24.2.html">What’s new in 0.24.2 (March 12, 2019)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.2.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.24.1.html">What’s new in 0.24.1 (February 3, 2019)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.1.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.1.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.24.0.html">What’s new in 0.24.0 (January 25, 2019)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.0.html#extension-type-changes">Extension type changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.0.html#removal-of-prior-version-deprecations-changes">Removal of prior version deprecations/changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.24.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-23">
+<h2>Version 0.23<a class="headerlink" href="#version-0-23" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.4.html">What’s new in 0.23.4 (August 3, 2018)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.4.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.4.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.4.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.3.html">What’s new in 0.23.3 (July 7, 2018)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.3.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.2.html">What’s new in 0.23.2 (July 5, 2018)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.2.html#logical-reductions-over-entire-dataframe">Logical reductions over entire DataFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.2.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.2.html#build-changes">Build changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.1.html">What’s new in 0.23.1 (June 12, 2018)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.1.html#fixed-regressions">Fixed regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.1.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.0.html">What’s new in 0.23.0 (May 15, 2018)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.0.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.0.html#removal-of-prior-version-deprecations-changes">Removal of prior version deprecations/changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.0.html#documentation-changes">Documentation changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.23.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-22">
+<h2>Version 0.22<a class="headerlink" href="#version-0-22" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.22.0.html">Version 0.22.0 (December 29, 2017)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.22.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.22.0.html#compatibility">Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.22.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-21">
+<h2>Version 0.21<a class="headerlink" href="#version-0-21" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.21.1.html">Version 0.21.1 (December 12, 2017)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.1.html#restore-matplotlib-datetime-converter-registration">Restore Matplotlib datetime converter registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.1.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.1.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.1.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.21.0.html">Version 0.21.0 (October 27, 2017)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.0.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.0.html#removal-of-prior-version-deprecations-changes">Removal of prior version deprecations/changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.0.html#documentation-changes">Documentation changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.21.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-20">
+<h2>Version 0.20<a class="headerlink" href="#version-0-20" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.20.3.html">Version 0.20.3 (July 7, 2017)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.3.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.3.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.20.2.html">Version 0.20.2 (June 4, 2017)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.2.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.2.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.20.0.html">Version 0.20.1 (May 5, 2017)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.0.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.0.html#reorganization-of-the-library-privacy-changes">Reorganization of the library: privacy changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.0.html#removal-of-prior-version-deprecations-changes">Removal of prior version deprecations/changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.20.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-19">
+<h2>Version 0.19<a class="headerlink" href="#version-0-19" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.19.2.html">Version 0.19.2 (December 24, 2016)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.2.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.2.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.19.1.html">Version 0.19.1 (November 3, 2016)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.1.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.19.0.html">Version 0.19.0 (October 2, 2016)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.0.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.0.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.0.html#removal-of-prior-version-deprecations-changes">Removal of prior version deprecations/changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.19.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-18">
+<h2>Version 0.18<a class="headerlink" href="#version-0-18" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.18.1.html">Version 0.18.1 (May 3, 2016)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.18.1.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.18.1.html#sparse-changes">Sparse changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.18.1.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.18.1.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.18.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.18.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.18.0.html">Version 0.18.0 (March 13, 2016)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.18.0.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.18.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.18.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.18.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.18.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-17">
+<h2>Version 0.17<a class="headerlink" href="#version-0-17" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.17.1.html">Version 0.17.1 (November 21, 2015)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.17.1.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.17.1.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.17.1.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.17.1.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.17.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.17.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.17.0.html">Version 0.17.0 (October 9, 2015)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.17.0.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.17.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.17.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.17.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.17.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-16">
+<h2>Version 0.16<a class="headerlink" href="#version-0-16" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.16.2.html">Version 0.16.2 (June 12, 2015)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.2.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.2.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.2.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.16.1.html">Version 0.16.1 (May 11, 2015)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.1.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.1.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.1.html#index-representation">Index representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.1.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.16.0.html">Version 0.16.0 (March 22, 2015)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.0.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.16.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-15">
+<h2>Version 0.15<a class="headerlink" href="#version-0-15" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.15.2.html">Version 0.15.2 (December 12, 2014)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.2.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.2.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.2.html#performance">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.2.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.15.1.html">Version 0.15.1 (November 9, 2014)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.1.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.1.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.15.0.html">Version 0.15.0 (October 18, 2014)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.0.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.0.html#backwards-incompatible-api-changes">Backwards incompatible API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.0.html#performance">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.15.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-14">
+<h2>Version 0.14<a class="headerlink" href="#version-0-14" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.14.1.html">Version 0.14.1 (July 11, 2014)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.1.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.1.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.1.html#performance">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.1.html#experimental">Experimental</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.14.0.html">Version 0.14.0 (May 31 , 2014)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#display-changes">Display changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#text-parsing-api-changes">Text parsing API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#groupby-api-changes">GroupBy API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#sql">SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#multi-indexing-using-slicers">Multi-indexing using slicers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#plotting">Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#prior-version-deprecations-changes">Prior version deprecations/changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#known-issues">Known issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#performance">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#experimental">Experimental</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.14.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-13">
+<h2>Version 0.13<a class="headerlink" href="#version-0-13" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.13.1.html">Version 0.13.1 (February 3, 2014)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.1.html#output-formatting-enhancements">Output formatting enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.1.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.1.html#prior-version-deprecations-changes">Prior version deprecations/changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.1.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.1.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.1.html#performance">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.1.html#experimental">Experimental</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.1.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.13.0.html">Version 0.13.0 (January 3, 2014)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.0.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.0.html#prior-version-deprecations-changes">Prior version deprecations/changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.0.html#deprecations">Deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.0.html#indexing-api-changes">Indexing API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.0.html#float64index-api-change">Float64Index API change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.0.html#hdfstore-api-changes">HDFStore API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.0.html#dataframe-repr-changes">DataFrame repr changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.0.html#experimental">Experimental</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.0.html#internal-refactoring">Internal refactoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.13.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-12">
+<h2>Version 0.12<a class="headerlink" href="#version-0-12" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.12.0.html">Version 0.12.0 (July 24, 2013)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.12.0.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.12.0.html#io-enhancements">IO enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.12.0.html#other-enhancements">Other enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.12.0.html#experimental-features">Experimental features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.12.0.html#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.12.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-11">
+<h2>Version 0.11<a class="headerlink" href="#version-0-11" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.11.0.html">Version 0.11.0 (April 22, 2013)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.11.0.html#selection-choices">Selection choices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.11.0.html#selection-deprecations">Selection deprecations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.11.0.html#dtypes">Dtypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.11.0.html#dtype-conversion">Dtype conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.11.0.html#dtype-gotchas">Dtype gotchas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.11.0.html#datetimes-conversion">Datetimes conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.11.0.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.11.0.html#enhancements">Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.11.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-10">
+<h2>Version 0.10<a class="headerlink" href="#version-0-10" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.10.1.html">Version 0.10.1 (January 22, 2013)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.10.1.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.10.1.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.10.1.html#hdfstore">HDFStore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.10.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.10.0.html">Version 0.10.0 (December 17, 2012)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.10.0.html#file-parsing-new-features">File parsing new features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.10.0.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.10.0.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.10.0.html#wide-dataframe-printing">Wide DataFrame printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.10.0.html#updated-pytables-support">Updated PyTables support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.10.0.html#n-dimensional-panels-experimental">N dimensional panels (experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.10.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-9">
+<h2>Version 0.9<a class="headerlink" href="#version-0-9" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.9.1.html">Version 0.9.1 (November 14, 2012)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.9.1.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.9.1.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.9.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.9.0.html">Version 0.9.0 (October 7, 2012)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.9.0.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.9.0.html#api-changes">API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.9.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-8">
+<h2>Version 0.8<a class="headerlink" href="#version-0-8" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.8.1.html">Version 0.8.1 (July 22, 2012)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.8.1.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.8.1.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.8.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.8.0.html">Version 0.8.0 (June 29, 2012)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.8.0.html#support-for-non-unique-indexes">Support for non-unique indexes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.8.0.html#numpy-datetime64-dtype-and-1-6-dependency">NumPy datetime64 dtype and 1.6 dependency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.8.0.html#time-series-changes-and-improvements">Time Series changes and improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.8.0.html#other-new-features">Other new features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.8.0.html#new-plotting-methods">New plotting methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.8.0.html#other-api-changes">Other API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.8.0.html#potential-porting-issues-for-pandas-0-7-3-users">Potential porting issues for pandas &lt;= 0.7.3 users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.8.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-7">
+<h2>Version 0.7<a class="headerlink" href="#version-0-7" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.7.3.html">Version 0.7.3 (April 12, 2012)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.3.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.3.html#na-boolean-comparison-api-change">NA boolean comparison API change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.3.html#other-api-changes">Other API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.3.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.7.2.html">Version 0.7.2 (March 16, 2012)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.2.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.2.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.2.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.7.1.html">Version 0.7.1 (February 29, 2012)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.1.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.1.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.7.0.html">Version 0.7.0 (February 9, 2012)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.0.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.0.html#api-changes-to-integer-indexing">API changes to integer indexing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.0.html#api-tweaks-regarding-label-based-slicing">API tweaks regarding label-based slicing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.0.html#changes-to-series-operator">Changes to Series <code class="docutils literal notranslate"><span class="pre">[]</span></code> operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.0.html#other-api-changes">Other API changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.0.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.7.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-6">
+<h2>Version 0.6<a class="headerlink" href="#version-0-6" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.6.1.html">Version 0.6.1 (December 13, 2011)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.6.1.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.6.1.html#performance-improvements">Performance improvements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.6.1.html#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="v0.6.0.html">Version 0.6.0 (November 25, 2011)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.6.0.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.6.0.html#performance-enhancements">Performance enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.6.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-5">
+<h2>Version 0.5<a class="headerlink" href="#version-0-5" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.5.0.html">Version 0.5.0 (October 24, 2011)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.5.0.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.5.0.html#performance-enhancements">Performance enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.5.0.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="version-0-4">
+<h2>Version 0.4<a class="headerlink" href="#version-0-4" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="v0.4.x.html">Versions 0.4.1 through 0.4.3 (September 25 - October 9, 2011)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="v0.4.x.html#new-features">New features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.4.x.html#performance-enhancements">Performance enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v0.4.x.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../development/community.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Contributor community</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="v2.2.2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">What’s new in 2.2.2 (April 10, 2024)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-2-2">Version 2.2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-2-1">Version 2.1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-2-0">Version 2.0</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-1-5">Version 1.5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-1-4">Version 1.4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-1-3">Version 1.3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-1-2">Version 1.2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-1-1">Version 1.1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-1-0">Version 1.0</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-25">Version 0.25</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-24">Version 0.24</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-23">Version 0.23</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-22">Version 0.22</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-21">Version 0.21</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-20">Version 0.20</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-19">Version 0.19</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-18">Version 0.18</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-17">Version 0.17</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-16">Version 0.16</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-15">Version 0.15</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-14">Version 0.14</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-13">Version 0.13</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-12">Version 0.12</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-11">Version 0.11</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-10">Version 0.10</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-9">Version 0.9</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-8">Version 0.8</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-7">Version 0.7</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-6">Version 0.6</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-5">Version 0.5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-4">Version 0.4</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/whatsnew/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">
+    &copy 2024, pandas via <a href="https://numfocus.org">NumFOCUS, Inc.</a> Hosted by <a href="https://www.ovhcloud.com">OVHcloud</a>.
+</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

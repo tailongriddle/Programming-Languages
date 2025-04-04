@@ -1,0 +1,98 @@
+pandas.tseries.offsets.FY5253
+=============================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: FY5253
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~FY5253.base
+      
+      
+        ~FY5253.freqstr
+      
+      
+        ~FY5253.kwds
+      
+      
+        ~FY5253.n
+      
+      
+        ~FY5253.name
+      
+      
+        ~FY5253.nanos
+      
+      
+        ~FY5253.normalize
+      
+      
+        ~FY5253.rule_code
+      
+      
+        ~FY5253.startingMonth
+      
+      
+        ~FY5253.variation
+      
+      
+        ~FY5253.weekday
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~FY5253.copy
+      
+      
+        ~FY5253.get_rule_code_suffix
+      
+      
+        ~FY5253.get_year_end
+      
+      
+        ~FY5253.is_anchored
+      
+      
+        ~FY5253.is_month_end
+      
+      
+        ~FY5253.is_month_start
+      
+      
+        ~FY5253.is_on_offset
+      
+      
+        ~FY5253.is_quarter_end
+      
+      
+        ~FY5253.is_quarter_start
+      
+      
+        ~FY5253.is_year_end
+      
+      
+        ~FY5253.is_year_start
+      
+      
+        ~FY5253.rollback
+      
+      
+        ~FY5253.rollforward
+      
+   
+   

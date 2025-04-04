@@ -1,0 +1,83 @@
+pandas.tseries.offsets.Easter
+=============================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: Easter
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~Easter.base
+      
+      
+        ~Easter.freqstr
+      
+      
+        ~Easter.kwds
+      
+      
+        ~Easter.n
+      
+      
+        ~Easter.name
+      
+      
+        ~Easter.nanos
+      
+      
+        ~Easter.normalize
+      
+      
+        ~Easter.rule_code
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~Easter.copy
+      
+      
+        ~Easter.is_anchored
+      
+      
+        ~Easter.is_month_end
+      
+      
+        ~Easter.is_month_start
+      
+      
+        ~Easter.is_on_offset
+      
+      
+        ~Easter.is_quarter_end
+      
+      
+        ~Easter.is_quarter_start
+      
+      
+        ~Easter.is_year_end
+      
+      
+        ~Easter.is_year_start
+      
+      
+        ~Easter.rollback
+      
+      
+        ~Easter.rollforward
+      
+   
+   

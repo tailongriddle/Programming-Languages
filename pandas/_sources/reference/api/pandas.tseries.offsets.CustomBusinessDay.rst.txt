@@ -1,0 +1,95 @@
+pandas.tseries.offsets.CustomBusinessDay
+========================================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: CustomBusinessDay
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~CustomBusinessDay.base
+      
+      
+        ~CustomBusinessDay.calendar
+      
+      
+        ~CustomBusinessDay.freqstr
+      
+      
+        ~CustomBusinessDay.holidays
+      
+      
+        ~CustomBusinessDay.kwds
+      
+      
+        ~CustomBusinessDay.n
+      
+      
+        ~CustomBusinessDay.name
+      
+      
+        ~CustomBusinessDay.nanos
+      
+      
+        ~CustomBusinessDay.normalize
+      
+      
+        ~CustomBusinessDay.offset
+      
+      
+        ~CustomBusinessDay.rule_code
+      
+      
+        ~CustomBusinessDay.weekmask
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~CustomBusinessDay.copy
+      
+      
+        ~CustomBusinessDay.is_anchored
+      
+      
+        ~CustomBusinessDay.is_month_end
+      
+      
+        ~CustomBusinessDay.is_month_start
+      
+      
+        ~CustomBusinessDay.is_on_offset
+      
+      
+        ~CustomBusinessDay.is_quarter_end
+      
+      
+        ~CustomBusinessDay.is_quarter_start
+      
+      
+        ~CustomBusinessDay.is_year_end
+      
+      
+        ~CustomBusinessDay.is_year_start
+      
+      
+        ~CustomBusinessDay.rollback
+      
+      
+        ~CustomBusinessDay.rollforward
+      
+   
+   

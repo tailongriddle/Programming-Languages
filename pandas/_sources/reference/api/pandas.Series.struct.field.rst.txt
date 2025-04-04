@@ -1,0 +1,6 @@
+pandas.Series.struct.field
+==========================
+
+.. currentmodule:: pandas
+
+.. autoaccessormethod:: Series.struct.field

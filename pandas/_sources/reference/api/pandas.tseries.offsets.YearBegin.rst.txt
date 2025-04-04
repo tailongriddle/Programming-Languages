@@ -1,0 +1,86 @@
+pandas.tseries.offsets.YearBegin
+================================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: YearBegin
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~YearBegin.base
+      
+      
+        ~YearBegin.freqstr
+      
+      
+        ~YearBegin.kwds
+      
+      
+        ~YearBegin.month
+      
+      
+        ~YearBegin.n
+      
+      
+        ~YearBegin.name
+      
+      
+        ~YearBegin.nanos
+      
+      
+        ~YearBegin.normalize
+      
+      
+        ~YearBegin.rule_code
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~YearBegin.copy
+      
+      
+        ~YearBegin.is_anchored
+      
+      
+        ~YearBegin.is_month_end
+      
+      
+        ~YearBegin.is_month_start
+      
+      
+        ~YearBegin.is_on_offset
+      
+      
+        ~YearBegin.is_quarter_end
+      
+      
+        ~YearBegin.is_quarter_start
+      
+      
+        ~YearBegin.is_year_end
+      
+      
+        ~YearBegin.is_year_start
+      
+      
+        ~YearBegin.rollback
+      
+      
+        ~YearBegin.rollforward
+      
+   
+   

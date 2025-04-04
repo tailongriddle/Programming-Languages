@@ -1,0 +1,6 @@
+pandas.core.groupby.SeriesGroupBy.hist
+======================================
+
+.. currentmodule:: pandas.core.groupby
+
+.. automethod:: SeriesGroupBy.hist

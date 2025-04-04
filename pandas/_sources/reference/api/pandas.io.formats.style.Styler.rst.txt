@@ -1,0 +1,155 @@
+pandas.io.formats.style.Styler
+==============================
+
+.. currentmodule:: pandas.io.formats.style
+
+.. autoclass:: Styler
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~Styler.env
+      
+      
+        ~Styler.loader
+      
+      
+        ~Styler.template_html
+      
+      
+        ~Styler.template_html_style
+      
+      
+        ~Styler.template_html_table
+      
+      
+        ~Styler.template_latex
+      
+      
+        ~Styler.template_string
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~Styler.apply
+      
+      
+        ~Styler.apply_index
+      
+      
+        ~Styler.applymap
+      
+      
+        ~Styler.applymap_index
+      
+      
+        ~Styler.background_gradient
+      
+      
+        ~Styler.bar
+      
+      
+        ~Styler.clear
+      
+      
+        ~Styler.concat
+      
+      
+        ~Styler.export
+      
+      
+        ~Styler.format
+      
+      
+        ~Styler.format_index
+      
+      
+        ~Styler.from_custom_template
+      
+      
+        ~Styler.hide
+      
+      
+        ~Styler.highlight_between
+      
+      
+        ~Styler.highlight_max
+      
+      
+        ~Styler.highlight_min
+      
+      
+        ~Styler.highlight_null
+      
+      
+        ~Styler.highlight_quantile
+      
+      
+        ~Styler.map
+      
+      
+        ~Styler.map_index
+      
+      
+        ~Styler.pipe
+      
+      
+        ~Styler.relabel_index
+      
+      
+        ~Styler.set_caption
+      
+      
+        ~Styler.set_properties
+      
+      
+        ~Styler.set_sticky
+      
+      
+        ~Styler.set_table_attributes
+      
+      
+        ~Styler.set_table_styles
+      
+      
+        ~Styler.set_td_classes
+      
+      
+        ~Styler.set_tooltips
+      
+      
+        ~Styler.set_uuid
+      
+      
+        ~Styler.text_gradient
+      
+      
+        ~Styler.to_excel
+      
+      
+        ~Styler.to_html
+      
+      
+        ~Styler.to_latex
+      
+      
+        ~Styler.to_string
+      
+      
+        ~Styler.use
+      
+   
+   

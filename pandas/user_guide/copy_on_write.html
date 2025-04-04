@@ -1,0 +1,1074 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Copy-on-Write (CoW) &#8212; pandas 2.2.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css?v=150e0881" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css?v=b7db95b1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js?v=219dea72"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/copy_on_write';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.pydata.org/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.2';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Merge, join, concatenate and compare" href="merging.html" />
+    <link rel="prev" title="MultiIndex / advanced indexing" href="advanced.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.2.2 documentation - Home"/>
+    <script>document.write(`<img src="https://pandas.pydata.org/static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.2.2 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">
+                        Development
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">
+                        Release notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">
+                        Development
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">
+                        Release notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10min.html">10 minutes to pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dsintro.html">Intro to data structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Essential basic functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO tools (text, CSV, HDF5, …)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyarrow.html">PyArrow Functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">Indexing and selecting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">MultiIndex / advanced indexing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Copy-on-Write (CoW)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merging.html">Merge, join, concatenate and compare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reshaping.html">Reshaping and pivot tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text.html">Working with text data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing_data.html">Working with missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duplicates.html">Duplicate Labels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="categorical.html">Categorical data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integer_na.html">Nullable integer data type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boolean.html">Nullable Boolean data type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">Chart visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">Table Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">Group by: split-apply-combine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">Windowing operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timeseries.html">Time series / date functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timedeltas.html">Time deltas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">Options and settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enhancingperf.html">Enhancing performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale.html">Scaling to large datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparse.html">Sparse data structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gotchas.html">Frequently Asked Questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">Cookbook</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Copy-on-Write (CoW)</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="copy-on-write-cow">
+<span id="copy-on-write"></span><h1>Copy-on-Write (CoW)<a class="headerlink" href="#copy-on-write-cow" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Copy-on-Write will become the default in pandas 3.0. We recommend
+<a class="reference internal" href="#copy-on-write-enabling"><span class="std std-ref">turning it on now</span></a>
+to benefit from all improvements.</p>
+</div>
+<p>Copy-on-Write was first introduced in version 1.5.0. Starting from version 2.0 most of the
+optimizations that become possible through CoW are implemented and supported. All possible
+optimizations are supported starting from pandas 2.1.</p>
+<p>CoW will be enabled by default in version 3.0.</p>
+<p>CoW will lead to more predictable behavior since it is not possible to update more than
+one object with one statement, e.g. indexing operations or methods won’t have side-effects. Additionally, through
+delaying copies as long as possible, the average performance and memory usage will improve.</p>
+<section id="previous-behavior">
+<h2>Previous behavior<a class="headerlink" href="#previous-behavior" title="Link to this heading">#</a></h2>
+<p>pandas indexing behavior is tricky to understand. Some operations return views while
+other return copies. Depending on the result of the operation, mutating one object
+might accidentally mutate another:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [2]: </span><span class="n">subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">]</span>
+
+<span class="gp">In [3]: </span><span class="n">subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [4]: </span><span class="n">df</span>
+<span class="gh">Out[4]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre></div>
+</div>
+<p>Mutating <code class="docutils literal notranslate"><span class="pre">subset</span></code>, e.g. updating its values, also updates <code class="docutils literal notranslate"><span class="pre">df</span></code>. The exact behavior is
+hard to predict. Copy-on-Write solves accidentally modifying more than one object,
+it explicitly disallows this. With CoW enabled, <code class="docutils literal notranslate"><span class="pre">df</span></code> is unchanged:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">copy_on_write</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="gp">In [6]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [7]: </span><span class="n">subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">]</span>
+
+<span class="gp">In [8]: </span><span class="n">subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [9]: </span><span class="n">df</span>
+<span class="gh">Out[9]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    1    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre></div>
+</div>
+<p>The following sections will explain what this means and how it impacts existing
+applications.</p>
+</section>
+<section id="migrating-to-copy-on-write">
+<span id="copy-on-write-migration-guide"></span><h2>Migrating to Copy-on-Write<a class="headerlink" href="#migrating-to-copy-on-write" title="Link to this heading">#</a></h2>
+<p>Copy-on-Write will be the default and only mode in pandas 3.0. This means that users
+need to migrate their code to be compliant with CoW rules.</p>
+<p>The default mode in pandas will raise warnings for certain cases that will actively
+change behavior and thus change user intended behavior.</p>
+<p>We added another mode, e.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">copy_on_write</span> <span class="o">=</span> <span class="s2">&quot;warn&quot;</span>
+</pre></div>
+</div>
+<p>that will warn for every operation that will change behavior with CoW. We expect this mode
+to be very noisy, since many cases that we don’t expect that they will influence users will
+also emit a warning. We recommend checking this mode and analyzing the warnings, but it is
+not necessary to address all of these warning. The first two items of the following lists
+are the only cases that need to be addressed to make existing code work with CoW.</p>
+<p>The following few items describe the user visible changes:</p>
+<p><strong>Chained assignment will never work</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">loc</span></code> should be used as an alternative. Check the
+<a class="reference internal" href="#copy-on-write-chained-assignment"><span class="std std-ref">chained assignment section</span></a> for more details.</p>
+<p><strong>Accessing the underlying array of a pandas object will return a read-only view</strong></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="gp">In [11]: </span><span class="n">ser</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="gh">Out[11]: </span><span class="go">array([1, 2, 3])</span>
+</pre></div>
+</div>
+<p>This example returns a NumPy array that is a view of the Series object. This view can
+be modified and thus also modify the pandas object. This is not compliant with CoW
+rules. The returned array is set to non-writeable to protect against this behavior.
+Creating a copy of this array allows modification. You can also make the array
+writeable again if you don’t care about the pandas object anymore.</p>
+<p>See the section about <a class="reference internal" href="#copy-on-write-read-only-na"><span class="std std-ref">read-only NumPy arrays</span></a>
+for more details.</p>
+<p><strong>Only one pandas object is updated at once</strong></p>
+<p>The following code snippet updates both <code class="docutils literal notranslate"><span class="pre">df</span></code> and <code class="docutils literal notranslate"><span class="pre">subset</span></code> without CoW:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [13]: </span><span class="n">subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">]</span>
+
+<span class="gp">In [14]: </span><span class="n">subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [15]: </span><span class="n">df</span>
+<span class="gh">Out[15]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    1    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre></div>
+</div>
+<p>This won’t be possible anymore with CoW, since the CoW rules explicitly forbid this.
+This includes updating a single column as a <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> and relying on the change
+propagating back to the parent <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.
+This statement can be rewritten into a single statement with <code class="docutils literal notranslate"><span class="pre">loc</span></code> or <code class="docutils literal notranslate"><span class="pre">iloc</span></code> if
+this behavior is necessary. <a class="reference internal" href="../reference/api/pandas.DataFrame.where.html#pandas.DataFrame.where" title="pandas.DataFrame.where"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.where()</span></code></a> is another suitable alternative
+for this case.</p>
+<p>Updating a column selected from a <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> with an inplace method will
+also not work anymore.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [17]: </span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [18]: </span><span class="n">df</span>
+<span class="gh">Out[18]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    1    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre></div>
+</div>
+<p>This is another form of chained assignment. This can generally be rewritten in 2
+different forms:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [20]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">5</span><span class="p">}},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [21]: </span><span class="n">df</span>
+<span class="gh">Out[21]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    5    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre></div>
+</div>
+<p>A different alternative would be to not use <code class="docutils literal notranslate"><span class="pre">inplace</span></code>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [23]: </span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="gp">In [24]: </span><span class="n">df</span>
+<span class="gh">Out[24]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    5    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre></div>
+</div>
+<p><strong>Constructors now copy NumPy arrays by default</strong></p>
+<p>The Series and DataFrame constructors will now copy NumPy array by default when not
+otherwise specified. This was changed to avoid mutating a pandas object when the
+NumPy array is changed inplace outside of pandas. You can set <code class="docutils literal notranslate"><span class="pre">copy=False</span></code> to
+avoid this copy.</p>
+</section>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading">#</a></h2>
+<p>CoW means that any DataFrame or Series derived from another in any way always
+behaves as a copy. As a consequence, we can only change the values of an object
+through modifying the object itself. CoW disallows updating a DataFrame or a Series
+that shares data with another DataFrame or Series object inplace.</p>
+<p>This avoids side-effects when modifying values and hence, most methods can avoid
+actually copying the data and only trigger a copy when necessary.</p>
+<p>The following example will operate inplace with CoW:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [26]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [27]: </span><span class="n">df</span>
+<span class="gh">Out[27]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre></div>
+</div>
+<p>The object <code class="docutils literal notranslate"><span class="pre">df</span></code> does not share any data with any other object and hence no
+copy is triggered when updating the values. In contrast, the following operation
+triggers a copy of the data under CoW:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [29]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [30]: </span><span class="n">df2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [31]: </span><span class="n">df</span>
+<span class="gh">Out[31]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    1    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+
+<span class="gp">In [32]: </span><span class="n">df2</span>
+<span class="gh">Out[32]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">reset_index</span></code> returns a lazy copy with CoW while it copies the data without CoW.
+Since both objects, <code class="docutils literal notranslate"><span class="pre">df</span></code> and <code class="docutils literal notranslate"><span class="pre">df2</span></code> share the same data, a copy is triggered
+when modifying <code class="docutils literal notranslate"><span class="pre">df2</span></code>. The object <code class="docutils literal notranslate"><span class="pre">df</span></code> still has the same values as initially
+while <code class="docutils literal notranslate"><span class="pre">df2</span></code> was modified.</p>
+<p>If the object <code class="docutils literal notranslate"><span class="pre">df</span></code> isn’t needed anymore after performing the <code class="docutils literal notranslate"><span class="pre">reset_index</span></code> operation,
+you can emulate an inplace-like operation through assigning the output of <code class="docutils literal notranslate"><span class="pre">reset_index</span></code>
+to the same variable:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [34]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [35]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [36]: </span><span class="n">df</span>
+<span class="gh">Out[36]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre></div>
+</div>
+<p>The initial object gets out of scope as soon as the result of <code class="docutils literal notranslate"><span class="pre">reset_index</span></code> is
+reassigned and hence <code class="docutils literal notranslate"><span class="pre">df</span></code> does not share data with any other object. No copy
+is necessary when modifying the object. This is generally true for all methods
+listed in <a class="reference internal" href="#copy-on-write-optimizations"><span class="std std-ref">Copy-on-Write optimizations</span></a>.</p>
+<p>Previously, when operating on views, the view and the parent object was modified:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s2">&quot;mode.copy_on_write&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+<span class="gp">   ....: </span>    <span class="n">view</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:]</span>
+<span class="gp">   ....: </span>    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [38]: </span><span class="n">df</span>
+<span class="gh">Out[38]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+
+<span class="gp">In [39]: </span><span class="n">view</span>
+<span class="gh">Out[39]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre></div>
+</div>
+<p>CoW triggers a copy when <code class="docutils literal notranslate"><span class="pre">df</span></code> is changed to avoid mutating <code class="docutils literal notranslate"><span class="pre">view</span></code> as well:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [41]: </span><span class="n">view</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:]</span>
+
+<span class="gp">In [42]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [43]: </span><span class="n">df</span>
+<span class="gh">Out[43]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+
+<span class="gp">In [44]: </span><span class="n">view</span>
+<span class="gh">Out[44]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    1    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre></div>
+</div>
+</section>
+<section id="chained-assignment">
+<span id="copy-on-write-chained-assignment"></span><h2>Chained Assignment<a class="headerlink" href="#chained-assignment" title="Link to this heading">#</a></h2>
+<p>Chained assignment references a technique where an object is updated through
+two subsequent indexing operations, e.g.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s2">&quot;mode.copy_on_write&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+<span class="gp">   ....: </span>    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">][</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">   ....: </span>    <span class="n">df</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<p>The column <code class="docutils literal notranslate"><span class="pre">foo</span></code> is updated where the column <code class="docutils literal notranslate"><span class="pre">bar</span></code> is greater than 5.
+This violates the CoW principles though, because it would have to modify the
+view <code class="docutils literal notranslate"><span class="pre">df[&quot;foo&quot;]</span></code> and <code class="docutils literal notranslate"><span class="pre">df</span></code> in one step. Hence, chained assignment will
+consistently never work and raise a <code class="docutils literal notranslate"><span class="pre">ChainedAssignmentError</span></code> warning
+with CoW enabled:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [47]: </span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">][</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>With copy on write this can be done by using <code class="docutils literal notranslate"><span class="pre">loc</span></code>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [48]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</section>
+<section id="read-only-numpy-arrays">
+<span id="copy-on-write-read-only-na"></span><h2>Read-only NumPy arrays<a class="headerlink" href="#read-only-numpy-arrays" title="Link to this heading">#</a></h2>
+<p>Accessing the underlying NumPy array of a DataFrame will return a read-only array if the array
+shares data with the initial DataFrame:</p>
+<p>The array is a copy if the initial DataFrame consists of more than one array:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]})</span>
+
+<span class="gp">In [50]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="gh">Out[50]: </span>
+<span class="go">array([[1. , 1.5],</span>
+<span class="go">       [2. , 2.5]])</span>
+</pre></div>
+</div>
+<p>The array shares data with the DataFrame if the DataFrame consists of only one NumPy array:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [51]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]})</span>
+
+<span class="gp">In [52]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="gh">Out[52]: </span>
+<span class="go">array([[1, 3],</span>
+<span class="go">       [2, 4]])</span>
+</pre></div>
+</div>
+<p>This array is read-only, which means that it can’t be modified inplace:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [53]: </span><span class="n">arr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="gp">In [54]: </span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">54</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="ne">ValueError</span>: assignment destination is read-only
+</pre></div>
+</div>
+<p>The same holds true for a Series, since a Series always consists of a single array.</p>
+<p>There are two potential solution to this:</p>
+<ul class="simple">
+<li><p>Trigger a copy manually if you want to avoid updating DataFrames that share memory with your array.</p></li>
+<li><p>Make the array writeable. This is a more performant solution but circumvents Copy-on-Write rules, so
+it should be used with caution.</p></li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [55]: </span><span class="n">arr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="gp">In [56]: </span><span class="n">arr</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="gp">In [57]: </span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [58]: </span><span class="n">arr</span>
+<span class="gh">Out[58]: </span>
+<span class="go">array([[100,   3],</span>
+<span class="go">       [  2,   4]])</span>
+</pre></div>
+</div>
+</section>
+<section id="patterns-to-avoid">
+<h2>Patterns to avoid<a class="headerlink" href="#patterns-to-avoid" title="Link to this heading">#</a></h2>
+<p>No defensive copy will be performed if two objects share the same data while
+you are modifying one object inplace.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [59]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [60]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [61]: </span><span class="n">df2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>This creates two objects that share data and thus the setitem operation will trigger a
+copy. This is not necessary if the initial object <code class="docutils literal notranslate"><span class="pre">df</span></code> isn’t needed anymore.
+Simply reassigning to the same variable will invalidate the reference that is
+held by the object.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [63]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [64]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>No copy is necessary in this example.
+Creating multiple references keeps unnecessary references alive
+and thus will hurt performance with Copy-on-Write.</p>
+</section>
+<section id="copy-on-write-optimizations">
+<span id="id1"></span><h2>Copy-on-Write optimizations<a class="headerlink" href="#copy-on-write-optimizations" title="Link to this heading">#</a></h2>
+<p>A new lazy copy mechanism that defers the copy until the object in question is modified
+and only if this object shares data with another object. This mechanism was added to
+methods that don’t require a copy of the underlying data. Popular examples are <a class="reference internal" href="../reference/api/pandas.DataFrame.drop.html#pandas.DataFrame.drop" title="pandas.DataFrame.drop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.drop()</span></code></a> for <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>
+and <a class="reference internal" href="../reference/api/pandas.DataFrame.rename.html#pandas.DataFrame.rename" title="pandas.DataFrame.rename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.rename()</span></code></a>.</p>
+<p>These methods return views when Copy-on-Write is enabled, which provides a significant
+performance improvement compared to the regular execution.</p>
+</section>
+<section id="how-to-enable-cow">
+<span id="copy-on-write-enabling"></span><h2>How to enable CoW<a class="headerlink" href="#how-to-enable-cow" title="Link to this heading">#</a></h2>
+<p>Copy-on-Write can be enabled through the configuration option <code class="docutils literal notranslate"><span class="pre">copy_on_write</span></code>. The option can
+be turned on __globally__ through either of the following:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [65]: </span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;mode.copy_on_write&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [66]: </span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">copy_on_write</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="advanced.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">MultiIndex / advanced indexing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="merging.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Merge, join, concatenate and compare</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#previous-behavior">Previous behavior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#migrating-to-copy-on-write">Migrating to Copy-on-Write</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description">Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chained-assignment">Chained Assignment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-only-numpy-arrays">Read-only NumPy arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patterns-to-avoid">Patterns to avoid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-on-write-optimizations">Copy-on-Write optimizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-enable-cow">How to enable CoW</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user_guide/copy_on_write.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">
+    &copy 2024, pandas via <a href="https://numfocus.org">NumFOCUS, Inc.</a> Hosted by <a href="https://www.ovhcloud.com">OVHcloud</a>.
+</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+pandas.tseries.offsets.Minute
+=============================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: Minute
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~Minute.base
+      
+      
+        ~Minute.delta
+      
+      
+        ~Minute.freqstr
+      
+      
+        ~Minute.kwds
+      
+      
+        ~Minute.n
+      
+      
+        ~Minute.name
+      
+      
+        ~Minute.nanos
+      
+      
+        ~Minute.normalize
+      
+      
+        ~Minute.rule_code
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~Minute.copy
+      
+      
+        ~Minute.is_anchored
+      
+      
+        ~Minute.is_month_end
+      
+      
+        ~Minute.is_month_start
+      
+      
+        ~Minute.is_on_offset
+      
+      
+        ~Minute.is_quarter_end
+      
+      
+        ~Minute.is_quarter_start
+      
+      
+        ~Minute.is_year_end
+      
+      
+        ~Minute.is_year_start
+      
+      
+        ~Minute.rollback
+      
+      
+        ~Minute.rollforward
+      
+   
+   

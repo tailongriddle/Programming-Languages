@@ -1,0 +1,1146 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pandas maintenance &#8212; pandas 2.2.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css?v=150e0881" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css?v=b7db95b1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js?v=219dea72"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'development/maintaining';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.pydata.org/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.2';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Internals" href="internals.html" />
+    <link rel="prev" title="Contributing to the code base" href="contributing_codebase.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.2.2 documentation - Home"/>
+    <script>document.write(`<img src="https://pandas.pydata.org/static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.2.2 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Development
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">
+                        Release notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Development
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">
+                        Release notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to pandas</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing_environment.html">Creating a development environment</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_gitpod.html">Using Gitpod for pandas development</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing_documentation.html">Contributing to the documentation</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_docstring.html">pandas docstring guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing_codebase.html">Contributing to the code base</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">pandas maintenance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internals.html">Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">Copy on write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging_extensions.html">Debugging C extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">Extending pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Developer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">Contributor community</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Development</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">pandas maintenance</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="pandas-maintenance">
+<span id="maintaining"></span><h1>pandas maintenance<a class="headerlink" href="#pandas-maintenance" title="Link to this heading">#</a></h1>
+<p>This guide is for pandas’ maintainers. It may also be interesting to contributors
+looking to understand the pandas development process and what steps are necessary
+to become a maintainer.</p>
+<p>The main contributing guide is available at <a class="reference internal" href="contributing.html#contributing"><span class="std std-ref">Contributing to pandas</span></a>.</p>
+<section id="roles">
+<h2>Roles<a class="headerlink" href="#roles" title="Link to this heading">#</a></h2>
+<p>pandas uses two levels of permissions: <strong>triage</strong> and <strong>core</strong> team members.</p>
+<p>Triage members can label and close issues and pull requests.</p>
+<p>Core team members can label and close issues and pull request, and can merge
+pull requests.</p>
+<p>GitHub publishes the full <a class="reference external" href="https://docs.github.com/en/organizations/managing-access-to-your-organizations-repositories/repository-roles-for-an-organization">list of permissions</a>.</p>
+</section>
+<section id="tasks">
+<h2>Tasks<a class="headerlink" href="#tasks" title="Link to this heading">#</a></h2>
+<p>pandas is largely a volunteer project, so these tasks shouldn’t be read as
+“expectations” of triage and maintainers. Rather, they’re general descriptions
+of what it means to be a maintainer.</p>
+<ul class="simple">
+<li><p>Triage newly filed issues (see <a class="reference internal" href="#maintaining-triage"><span class="std std-ref">Issue triage</span></a>)</p></li>
+<li><p>Review newly opened pull requests</p></li>
+<li><p>Respond to updates on existing issues and pull requests</p></li>
+<li><p>Drive discussion and decisions on stalled issues and pull requests</p></li>
+<li><p>Provide experience / wisdom on API design questions to ensure consistency and maintainability</p></li>
+<li><p>Project organization (run / attend developer meetings, represent pandas)</p></li>
+</ul>
+<p><a class="reference external" href="https://matthewrocklin.com/blog/2019/05/18/maintainer">https://matthewrocklin.com/blog/2019/05/18/maintainer</a> may be interesting background
+reading.</p>
+</section>
+<section id="issue-triage">
+<span id="maintaining-triage"></span><h2>Issue triage<a class="headerlink" href="#issue-triage" title="Link to this heading">#</a></h2>
+<p>Triage is an important first step in addressing issues reported by the community, and even
+partial contributions are a great way to help maintain pandas. Only remove the “Needs Triage”
+tag once all of the steps below have been completed.</p>
+<p>Here’s a typical workflow for triaging a newly opened issue.</p>
+<ol class="arabic">
+<li><p><strong>Thank the reporter for opening an issue</strong></p>
+<p>The issue tracker is many people’s first interaction with the pandas project itself,
+beyond just using the library. As such, we want it to be a welcoming, pleasant
+experience.</p>
+</li>
+<li><p><strong>Is the necessary information provided?</strong></p>
+<p>Ideally reporters would fill out the issue template, but many don’t.
+If crucial information (like the version of pandas they used), is missing
+feel free to ask for that and label the issue with “Needs info”. The
+report should follow the guidelines in <a class="reference internal" href="contributing.html#contributing-bug-reports"><span class="std std-ref">Bug reports and enhancement requests</span></a>.
+You may want to link to that if they didn’t follow the template.</p>
+<p>Make sure that the title accurately reflects the issue. Edit it yourself
+if it’s not clear.</p>
+</li>
+<li><p><strong>Is this a duplicate issue?</strong></p>
+<p>We have many open issues. If a new issue is clearly a duplicate, label the
+new issue as “Duplicate” and close the issue with a link to the original issue.
+Make sure to still thank the reporter, and encourage them to chime in on the
+original issue, and perhaps try to fix it.</p>
+<p>If the new issue provides relevant information, such as a better or slightly
+different example, add it to the original issue as a comment or an edit to
+the original post.</p>
+</li>
+<li><p><strong>Is the issue minimal and reproducible</strong>?</p>
+<p>For bug reports, we ask that the reporter provide a minimal reproducible
+example. See <a class="reference external" href="https://matthewrocklin.com/blog/work/2018/02/28/minimal-bug-reports">https://matthewrocklin.com/blog/work/2018/02/28/minimal-bug-reports</a>
+for a good explanation. If the example is not reproducible, or if it’s
+<em>clearly</em> not minimal, feel free to ask the reporter if they can provide
+and example or simplify the provided one. Do acknowledge that writing
+minimal reproducible examples is hard work. If the reporter is struggling,
+you can try to write one yourself and we’ll edit the original post to include it.</p>
+<p>If a reproducible example can’t be provided, add the “Needs info” label.</p>
+<p>If a reproducible example is provided, but you see a simplification,
+edit the original post with your simpler reproducible example.</p>
+<p>Ensure the issue exists on the main branch and that it has the “Needs Triage” tag
+until all steps have been completed. Add a comment to the issue once you have
+verified it exists on the main branch, so others know it has been confirmed.</p>
+</li>
+<li><p><strong>Is this a clearly defined feature request?</strong></p>
+<p>Generally, pandas prefers to discuss and design new features in issues, before
+a pull request is made. Encourage the submitter to include a proposed API
+for the new feature. Having them write a full docstring is a good way to
+pin down specifics.</p>
+<p>Tag new feature requests with “Needs Discussion”, as we’ll need a discussion
+from several pandas maintainers before deciding whether the proposal is in
+scope for pandas.</p>
+</li>
+<li><p><strong>Is this a usage question?</strong></p>
+<p>We prefer that usage questions are asked on StackOverflow with the pandas
+tag. <a class="reference external" href="https://stackoverflow.com/questions/tagged/pandas">https://stackoverflow.com/questions/tagged/pandas</a></p>
+<p>If it’s easy to answer, feel free to link to the relevant documentation section,
+let them know that in the future this kind of question should be on
+StackOverflow, and close the issue.</p>
+</li>
+<li><p><strong>What labels and milestones should I add?</strong></p>
+<p>Apply the relevant labels. This is a bit of an art, and comes with experience.
+Look at similar issues to get a feel for how things are labeled.</p>
+<p>If the issue is clearly defined and the fix seems relatively straightforward,
+label the issue as “Good first issue”.</p>
+<p>Once you have completed the above, make sure to remove the “needs triage” label.</p>
+</li>
+</ol>
+</section>
+<section id="investigating-regressions">
+<span id="maintaining-regressions"></span><h2>Investigating regressions<a class="headerlink" href="#investigating-regressions" title="Link to this heading">#</a></h2>
+<p>Regressions are bugs that unintentionally break previously working code. The common way
+to  investigate regressions is by using
+<a class="reference external" href="https://git-scm.com/docs/git-bisect">git bisect</a>,
+which finds the first commit that introduced the bug.</p>
+<p>For example: a user reports that <code class="docutils literal notranslate"><span class="pre">pd.Series([1,</span> <span class="pre">1]).sum()</span></code> returns <code class="docutils literal notranslate"><span class="pre">3</span></code>
+in pandas version <code class="docutils literal notranslate"><span class="pre">1.5.0</span></code> while in version <code class="docutils literal notranslate"><span class="pre">1.4.0</span></code> it returned <code class="docutils literal notranslate"><span class="pre">2</span></code>. To begin,
+create a file <code class="docutils literal notranslate"><span class="pre">t.py</span></code> in your pandas directory, which contains</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="k">assert</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>and then run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">bisect</span> <span class="n">start</span>
+<span class="n">git</span> <span class="n">bisect</span> <span class="n">good</span> <span class="n">v1</span><span class="mf">.4.0</span>
+<span class="n">git</span> <span class="n">bisect</span> <span class="n">bad</span> <span class="n">v1</span><span class="mf">.5.0</span>
+<span class="n">git</span> <span class="n">bisect</span> <span class="n">run</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;python setup.py build_ext -j 4; python t.py&quot;</span>
+</pre></div>
+</div>
+<p>This finds the first commit that changed the behavior. The C extensions have to be
+rebuilt at every step, so the search can take a while.</p>
+<p>Exit bisect and rebuild the current version:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">bisect</span> <span class="n">reset</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build_ext</span> <span class="o">-</span><span class="n">j</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>Report your findings under the corresponding issue and ping the commit author to get
+their input.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">bisect</span> <span class="pre">run</span></code> command above, commits are considered good if <code class="docutils literal notranslate"><span class="pre">t.py</span></code> exits
+with <code class="docutils literal notranslate"><span class="pre">0</span></code> and bad otherwise. When raising an exception is the desired behavior,
+wrap the code in an appropriate <code class="docutils literal notranslate"><span class="pre">try/except</span></code> statement. See <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/35685">GH 35685</a> for
+more examples.</p>
+</div>
+</section>
+<section id="closing-issues">
+<span id="maintaining-closing"></span><h2>Closing issues<a class="headerlink" href="#closing-issues" title="Link to this heading">#</a></h2>
+<p>Be delicate here: many people interpret closing an issue as us saying that the
+conversation is over. It’s typically best to give the reporter some time to
+respond or self-close their issue if it’s determined that the behavior is not a bug,
+or the feature is out of scope. Sometimes reporters just go away though, and
+we’ll close the issue after the conversation has died.
+If you think an issue should be closed but are not completely sure, please apply
+the “closing candidate” label and wait for other maintainers to take a look.</p>
+</section>
+<section id="reviewing-pull-requests">
+<span id="maintaining-reviewing"></span><h2>Reviewing pull requests<a class="headerlink" href="#reviewing-pull-requests" title="Link to this heading">#</a></h2>
+<p>Anybody can review a pull request: regular contributors, triagers, or core-team
+members. But only core-team members can merge pull requests when they’re ready.</p>
+<p>Here are some things to check when reviewing a pull request.</p>
+<ul class="simple">
+<li><p>Tests should be in a sensible location: in the same file as closely related tests.</p></li>
+<li><p>New public APIs should be included somewhere in <code class="docutils literal notranslate"><span class="pre">doc/source/reference/</span></code>.</p></li>
+<li><p>New / changed API should use the <code class="docutils literal notranslate"><span class="pre">versionadded</span></code> or <code class="docutils literal notranslate"><span class="pre">versionchanged</span></code> directives in the docstring.</p></li>
+<li><p>User-facing changes should have a whatsnew in the appropriate file.</p></li>
+<li><p>Regression tests should reference the original GitHub issue number like <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">GH-1234</span></code>.</p></li>
+<li><p>The pull request should be labeled and assigned the appropriate milestone (the next patch release
+for regression fixes and small bug fixes, the next minor milestone otherwise)</p></li>
+<li><p>Changes should comply with our <a class="reference internal" href="policies.html#policies-version"><span class="std std-ref">Version policy</span></a>.</p></li>
+</ul>
+</section>
+<section id="backporting">
+<span id="maintaining-backporting"></span><h2>Backporting<a class="headerlink" href="#backporting" title="Link to this heading">#</a></h2>
+<p>pandas supports point releases (e.g. <code class="docutils literal notranslate"><span class="pre">1.4.3</span></code>) that aim to:</p>
+<ol class="arabic simple">
+<li><p>Fix bugs in new features introduced in the first minor version release.</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>e.g. If a new feature was added in <code class="docutils literal notranslate"><span class="pre">1.4</span></code> and contains a bug, a fix can be applied in <code class="docutils literal notranslate"><span class="pre">1.4.3</span></code></p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>Fix bugs that used to work in a few minor releases prior. There should be agreement between core team members that a backport is appropriate.</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>e.g. If a feature worked in <code class="docutils literal notranslate"><span class="pre">1.2</span></code> and stopped working since <code class="docutils literal notranslate"><span class="pre">1.3</span></code>, a fix can be applied in <code class="docutils literal notranslate"><span class="pre">1.4.3</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<p>Since pandas minor releases are based on GitHub branches (e.g. point release of <code class="docutils literal notranslate"><span class="pre">1.4</span></code> are based off the <code class="docutils literal notranslate"><span class="pre">1.4.x</span></code> branch),
+“backporting” means merging a pull request fix to the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch and correct minor branch associated with the next point release.</p>
+<p>By default, if a pull request is assigned to the next point release milestone within the GitHub interface,
+the backporting process should happen automatically by the <code class="docutils literal notranslate"><span class="pre">&#64;meeseeksdev</span></code> bot once the pull request is merged.
+A new pull request will be made backporting the pull request to the correct version branch.
+Sometimes due to merge conflicts, a manual pull request will need to be made addressing the code conflict.</p>
+<p>If the bot does not automatically start the backporting process, you can also write a GitHub comment in the merged pull request
+to trigger the backport:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@meeseeksdev</span> <span class="n">backport</span> <span class="n">version</span><span class="o">-</span><span class="n">branch</span>
+</pre></div>
+</div>
+<p>This will trigger a workflow which will backport a given change to a branch
+(e.g. &#64;meeseeksdev backport 1.4.x)</p>
+</section>
+<section id="cleaning-up-old-issues">
+<h2>Cleaning up old issues<a class="headerlink" href="#cleaning-up-old-issues" title="Link to this heading">#</a></h2>
+<p>Every open issue in pandas has a cost. Open issues make finding duplicates harder,
+and can make it harder to know what needs to be done in pandas. That said, closing
+issues isn’t a goal on its own. Our goal is to make pandas the best it can be,
+and that’s best done by ensuring that the quality of our open issues is high.</p>
+<p>Occasionally, bugs are fixed but the issue isn’t linked to in the Pull Request.
+In these cases, comment that “This has been fixed, but could use a test.” and
+label the issue as “Good First Issue” and “Needs Test”.</p>
+<p>If an older issue doesn’t follow our issue template, edit the original post to
+include a minimal example, the actual output, and the expected output. Uniformity
+in issue reports is valuable.</p>
+<p>If an older issue lacks a reproducible example, label it as “Needs Info” and
+ask them to provide one (or write one yourself if possible). If one isn’t
+provide reasonably soon, close it according to the policies in <a class="reference internal" href="#maintaining-closing"><span class="std std-ref">Closing issues</span></a>.</p>
+</section>
+<section id="cleaning-up-old-pull-requests">
+<h2>Cleaning up old pull requests<a class="headerlink" href="#cleaning-up-old-pull-requests" title="Link to this heading">#</a></h2>
+<p>Occasionally, contributors are unable to finish off a pull request.
+If some time has passed (two weeks, say) since the last review requesting changes,
+gently ask if they’re still interested in working on this. If another two weeks or
+so passes with no response, thank them for their work and then either:</p>
+<ul class="simple">
+<li><p>close the pull request;</p></li>
+<li><p>push to the contributor’s branch to push their work over the finish line (if
+you’re part of <code class="docutils literal notranslate"><span class="pre">pandas-core</span></code>). This can be helpful for pushing an important PR
+across the line, or for fixing a small merge conflict.</p></li>
+</ul>
+<p>If closing the pull request, then please comment on the original issue that
+“There’s a stalled PR at #1234 that may be helpful.”, and perhaps label the issue
+as “Good first issue” if the PR was relatively close to being accepted.</p>
+</section>
+<section id="becoming-a-pandas-maintainer">
+<h2>Becoming a pandas maintainer<a class="headerlink" href="#becoming-a-pandas-maintainer" title="Link to this heading">#</a></h2>
+<p>The full process is outlined in our <a class="reference external" href="https://github.com/pandas-dev/pandas/blob/main/web/pandas/about/governance.md">governance documents</a>. In summary,
+we’re happy to give triage permissions to anyone who shows interest by
+being helpful on the issue tracker.</p>
+<p>The required steps for adding a maintainer are:</p>
+<ol class="arabic simple">
+<li><p>Contact the contributor and ask their interest to join.</p></li>
+<li><p>Add the contributor to the appropriate <a class="reference external" href="https://github.com/orgs/pandas-dev/teams">GitHub Team</a> if accepted the invitation.</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas-core</span></code> is for core team members</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas-triage</span></code> is for pandas triage members</p></li>
+</ul>
+</div></blockquote>
+<p>If adding to <code class="docutils literal notranslate"><span class="pre">pandas-core</span></code>, there are two additional steps:</p>
+<ol class="arabic simple" start="3">
+<li><p>Add the contributor to the pandas Google group.</p></li>
+<li><p>Create a pull request to add the contributor’s GitHub handle to <code class="docutils literal notranslate"><span class="pre">pandas-dev/pandas/web/pandas/config.yml</span></code>.</p></li>
+</ol>
+<p>The current list of core-team members is at
+<a class="github reference external" href="https://github.com/pandas-dev/pandas/blob/main/web/pandas/config.yml">pandas-dev/pandas</a></p>
+</section>
+<section id="merging-pull-requests">
+<span id="maintaining-merging"></span><h2>Merging pull requests<a class="headerlink" href="#merging-pull-requests" title="Link to this heading">#</a></h2>
+<p>Only core team members can merge pull requests. We have a few guidelines.</p>
+<ol class="arabic simple">
+<li><p>You should typically not self-merge your own pull requests without approval.
+Exceptions include things like small changes to fix CI
+(e.g. pinning a package version). Self-merging with approval from other
+core team members is fine if the change is something you’re very confident
+about.</p></li>
+<li><p>You should not merge pull requests that have an active discussion, or pull
+requests that has any <code class="docutils literal notranslate"><span class="pre">-1</span></code> votes from a core maintainer. pandas operates
+by consensus.</p></li>
+<li><p>For larger changes, it’s good to have a +1 from at least two core team members.</p></li>
+</ol>
+<p>In addition to the items listed in <a class="reference internal" href="#maintaining-closing"><span class="std std-ref">Closing issues</span></a>, you should verify
+that the pull request is assigned the correct milestone.</p>
+<p>Pull requests merged with a patch-release milestone will typically be backported
+by our bot. Verify that the bot noticed the merge (it will leave a comment within
+a minute typically). If a manual backport is needed please do that, and remove
+the “Needs backport” label once you’ve done it manually. If you forget to assign
+a milestone before tagging, you can request the bot to backport it with:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">@Meeseeksdev backport &lt;branch&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="benchmark-machine">
+<span id="maintaining-asv-machine"></span><h2>Benchmark machine<a class="headerlink" href="#benchmark-machine" title="Link to this heading">#</a></h2>
+<p>The team currently owns dedicated hardware for hosting a website for pandas’ ASV performance benchmark. The results
+are published to <a class="reference external" href="https://asv-runner.github.io/asv-collection/pandas/">https://asv-runner.github.io/asv-collection/pandas/</a></p>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
+<p>The machine can be configured with the <a class="reference external" href="http://docs.ansible.com/ansible/latest/index.html">Ansible</a> playbook in <a class="github reference external" href="https://github.com/tomaugspurger/asv-runner">tomaugspurger/asv-runner</a>.</p>
+</section>
+<section id="publishing">
+<h3>Publishing<a class="headerlink" href="#publishing" title="Link to this heading">#</a></h3>
+<p>The results are published to another GitHub repository, <a class="github reference external" href="https://github.com/tomaugspurger/asv-collection">tomaugspurger/asv-collection</a>.
+Finally, we have a cron job on our docs server to pull from <a class="github reference external" href="https://github.com/tomaugspurger/asv-collection">tomaugspurger/asv-collection</a>, to serve them from <code class="docutils literal notranslate"><span class="pre">/speed</span></code>.
+Ask Tom or Joris for access to the webserver.</p>
+</section>
+<section id="debugging">
+<h3>Debugging<a class="headerlink" href="#debugging" title="Link to this heading">#</a></h3>
+<p>The benchmarks are scheduled by Airflow. It has a dashboard for viewing and debugging the results. You’ll need to setup an SSH tunnel to view them</p>
+<blockquote>
+<div><p>ssh -L 8080:localhost:8080 pandas&#64;panda.likescandy.com</p>
+</div></blockquote>
+</section>
+</section>
+<section id="release-process">
+<span id="maintaining-release"></span><h2>Release process<a class="headerlink" href="#release-process" title="Link to this heading">#</a></h2>
+<p>The release process makes a snapshot of pandas (a git commit) available to users with
+a particular version number. After the release the new pandas version will be available
+in the next places:</p>
+<ul class="simple">
+<li><p>Git repo with a <a class="reference external" href="https://github.com/pandas-dev/pandas/tags">new tag</a></p></li>
+<li><p>Source distribution in a <a class="reference external" href="https://github.com/pandas-dev/pandas/releases">GitHub release</a></p></li>
+<li><p>Pip packages in the <a class="reference external" href="https://pypi.org/project/pandas/">PyPI</a></p></li>
+<li><p>Conda/Mamba packages in <a class="reference external" href="https://anaconda.org/conda-forge/pandas">conda-forge</a></p></li>
+</ul>
+<p>The process for releasing a new version of pandas is detailed next section.</p>
+<p>The instructions contain <code class="docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code> which needs to be replaced with the version
+to be released (e.g. <code class="docutils literal notranslate"><span class="pre">1.5.2</span></code>). Also the branch to be released <code class="docutils literal notranslate"><span class="pre">&lt;branch&gt;</span></code>, which
+depends on whether the version being released is the release candidate of a new version,
+or any other version. Release candidates are released from <code class="docutils literal notranslate"><span class="pre">main</span></code>, while other
+versions are released from their branch (e.g. <code class="docutils literal notranslate"><span class="pre">1.5.x</span></code>).</p>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h3>
+<p>In order to be able to release a new pandas version, the next permissions are needed:</p>
+<ul class="simple">
+<li><p>Merge rights to the <a class="reference external" href="https://github.com/pandas-dev/pandas/">pandas</a> and
+<a class="reference external" href="https://github.com/conda-forge/pandas-feedstock/">pandas-feedstock</a> repositories.
+For the latter, open a PR adding your GitHub username to the conda-forge recipe.</p></li>
+<li><p>Permissions to push to <code class="docutils literal notranslate"><span class="pre">main</span></code> in the pandas repository, to push the new tags.</p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/pandas-feedstock/pulls">Write permissions to PyPI</a>.</p></li>
+<li><p>Access to our website / documentation server. Share your public key with the
+infrastructure committee to be added to the <code class="docutils literal notranslate"><span class="pre">authorized_keys</span></code> file of the main
+server user.</p></li>
+<li><p>Access to the social media accounts, to publish the announcements.</p></li>
+</ul>
+</section>
+<section id="pre-release">
+<h3>Pre-release<a class="headerlink" href="#pre-release" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Agree with the core team on the next topics:</p>
+<ul class="simple">
+<li><p>Release date (major/minor releases happen usually every 6 months, and patch releases
+monthly until x.x.5, just before the next major/minor)</p></li>
+<li><p>Blockers (issues and PRs that must be part of the release)</p></li>
+<li><p>Next version after the one being released</p></li>
+</ul>
+</li>
+<li><p>Update and clean release notes for the version to be released, including:</p>
+<ul class="simple">
+<li><p>Set the final date of the release</p></li>
+<li><p>Remove any unused bullet point</p></li>
+<li><p>Make sure there are no formatting issues, typos, etc.</p></li>
+</ul>
+</li>
+<li><p>Make sure the CI is green for the last commit of the branch being released.</p></li>
+<li><p>If not a release candidate, make sure all backporting pull requests to the branch
+being released are merged.</p></li>
+<li><p>Create a new issue and milestone for the version after the one being released.
+If the release was a release candidate, we would usually want to create issues and
+milestones for both the next major/minor, and the next patch release. In the
+milestone of a patch release, we add the description <code class="docutils literal notranslate"><span class="pre">on-merge:</span> <span class="pre">backport</span> <span class="pre">to</span> <span class="pre">&lt;branch&gt;</span></code>,
+so tagged PRs are automatically backported to the release branch by our bot.</p></li>
+<li><p>Change the milestone of all issues and PRs in the milestone being released to the
+next milestone.</p></li>
+</ol>
+</section>
+<section id="release">
+<h3>Release<a class="headerlink" href="#release" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Create an empty commit and a tag in the last commit of the branch to be released:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">&gt;</span>
+<span class="n">git</span> <span class="n">pull</span> <span class="o">--</span><span class="n">ff</span><span class="o">-</span><span class="n">only</span> <span class="n">upstream</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">&gt;</span>
+<span class="n">git</span> <span class="n">clean</span> <span class="o">-</span><span class="n">xdf</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">--</span><span class="n">allow</span><span class="o">-</span><span class="n">empty</span> <span class="o">--</span><span class="n">author</span><span class="o">=</span><span class="s2">&quot;Pandas Development Team &lt;pandas-dev@python.org&gt;&quot;</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;RLS: &lt;version&gt;&quot;</span>
+<span class="n">git</span> <span class="n">tag</span> <span class="o">-</span><span class="n">a</span> <span class="n">v</span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Version &lt;version&gt;&quot;</span>  <span class="c1"># NOTE that the tag is v1.5.2 with &quot;v&quot; not 1.5.2</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">upstream</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">follow</span><span class="o">-</span><span class="n">tags</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>The docs for the new version will be built and published automatically with the docs job in the CI,
+which will be triggered when the tag is pushed.</p>
+<ol class="arabic" start="2">
+<li><p>Only if the release is a release candidate, we want to create a new branch for it, immediately
+after creating the tag. For example, if we are releasing pandas 1.4.0rc0, we would like to
+create the branch 1.4.x to backport commits to the 1.4 versions. As well as create a tag to
+mark the start of the development of 1.5.0 (assuming it is the next version):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="mf">1.4</span><span class="o">.</span><span class="n">x</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">upstream</span> <span class="mf">1.4</span><span class="o">.</span><span class="n">x</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">main</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">--</span><span class="n">allow</span><span class="o">-</span><span class="n">empty</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Start 1.5.0&quot;</span>
+<span class="n">git</span> <span class="n">tag</span> <span class="o">-</span><span class="n">a</span> <span class="n">v1</span><span class="mf">.5.0</span><span class="o">.</span><span class="n">dev0</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;DEV: Start 1.5.0&quot;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">upstream</span> <span class="n">main</span> <span class="o">--</span><span class="n">follow</span><span class="o">-</span><span class="n">tags</span>
+</pre></div>
+</div>
+</li>
+<li><p>Download the source distribution and wheels from the <a class="reference external" href="https://anaconda.org/scientific-python-nightly-wheels/pandas">wheel staging area</a>.
+Be careful to make sure that no wheels are missing (e.g. due to failed builds).</p>
+<p>Running scripts/download_wheels.sh with the version that you want to download wheels/the sdist for should do the trick.
+This script will make a <code class="docutils literal notranslate"><span class="pre">dist</span></code> folder inside your clone of pandas and put the downloaded wheels and sdist there:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scripts</span><span class="o">/</span><span class="n">download_wheels</span><span class="o">.</span><span class="n">sh</span> <span class="o">&lt;</span><span class="n">VERSION</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create a <a class="reference external" href="https://github.com/pandas-dev/pandas/releases/new">new GitHub release</a>:</p>
+<ul class="simple">
+<li><p>Tag: <code class="docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code></p></li>
+<li><p>Title: <code class="docutils literal notranslate"><span class="pre">Pandas</span> <span class="pre">&lt;version&gt;</span></code></p></li>
+<li><p>Description: Copy the description of the last release of the same kind (release candidate, major/minor or patch release)</p></li>
+<li><p>Files: <code class="docutils literal notranslate"><span class="pre">pandas-&lt;version&gt;.tar.gz</span></code> source distribution just generated</p></li>
+<li><p>Set as a pre-release: Only check for a release candidate</p></li>
+<li><p>Set as the latest release: Leave checked, unless releasing a patch release for an older version
+(e.g. releasing 1.4.5 after 1.5 has been released)</p></li>
+</ul>
+</li>
+<li><p>Upload wheels to PyPI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">twine</span> <span class="n">upload</span> <span class="n">pandas</span><span class="o">/</span><span class="n">dist</span><span class="o">/</span><span class="n">pandas</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;*.</span><span class="p">{</span><span class="n">whl</span><span class="p">,</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span><span class="p">}</span> <span class="o">--</span><span class="n">skip</span><span class="o">-</span><span class="n">existing</span>
+</pre></div>
+</div>
+</li>
+<li><p>The GitHub release will after some hours trigger an
+<a class="reference external" href="https://github.com/conda-forge/pandas-feedstock/pulls">automated conda-forge PR</a>.
+(If you don’t want to wait, you can open an issue titled <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">update</span> <span class="pre">version</span></code> to trigger the bot.)
+Merge it once the CI is green, and it will generate the conda-forge packages.</p>
+<p>In case a manual PR needs to be done, the version, sha256 and build fields are the
+ones that usually need to be changed. If anything else in the recipe has changed since
+the last release, those changes should be available in <code class="docutils literal notranslate"><span class="pre">ci/meta.yaml</span></code>.</p>
+</li>
+</ol>
+</section>
+<section id="post-release">
+<h3>Post-Release<a class="headerlink" href="#post-release" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Update symlinks to stable documentation by logging in to our web server, and
+editing <code class="docutils literal notranslate"><span class="pre">/var/www/html/pandas-docs/stable</span></code> to point to <code class="docutils literal notranslate"><span class="pre">version/&lt;latest-version&gt;</span></code>
+for major and minor releases, or <code class="docutils literal notranslate"><span class="pre">version/&lt;minor&gt;</span></code> to <code class="docutils literal notranslate"><span class="pre">version/&lt;patch&gt;</span></code> for
+patch releases. The exact instructions are (replace the example version numbers by
+the appropriate ones for the version you are releasing):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Log in to the server and use the correct user.</p></li>
+<li><p><cite>cd /var/www/html/pandas-docs/</cite></p></li>
+<li><p><cite>ln -sfn version/2.1 stable</cite> (for a major or minor release)</p></li>
+<li><p><cite>ln -sfn version/2.0.3 version/2.0</cite> (for a patch release)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>If releasing a major or minor release, open a PR in our source code to update
+<code class="docutils literal notranslate"><span class="pre">web/pandas/versions.json</span></code>, to have the desired versions in the documentation
+dropdown menu.</p></li>
+<li><p>Close the milestone and the issue for the released version.</p></li>
+<li><p>Create a new issue for the next release, with the estimated date of release.</p></li>
+<li><p>Open a PR with the placeholder for the release notes of the next version. See
+for example <a class="reference external" href="https://github.com/pandas-dev/pandas/pull/49843/files">the PR for 1.5.3</a>.
+Note that the template to use depends on whether it is a major, minor or patch release.</p></li>
+<li><p>Announce the new release in the official channels (use previous announcements
+for reference):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The pandas-dev and pydata mailing lists</p></li>
+<li><p>Twitter, Mastodon, Telegram and LinkedIn</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Update this release instructions to fix anything incorrect and to update about any
+change since the last release.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="contributing_codebase.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Contributing to the code base</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="internals.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Internals</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#roles">Roles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks">Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#issue-triage">Issue triage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#investigating-regressions">Investigating regressions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-issues">Closing issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reviewing-pull-requests">Reviewing pull requests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backporting">Backporting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-up-old-issues">Cleaning up old issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-up-old-pull-requests">Cleaning up old pull requests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#becoming-a-pandas-maintainer">Becoming a pandas maintainer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-pull-requests">Merging pull requests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-machine">Benchmark machine</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#publishing">Publishing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#release-process">Release process</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-release">Pre-release</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#release">Release</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-release">Post-Release</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/development/maintaining.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">
+    &copy 2024, pandas via <a href="https://numfocus.org">NumFOCUS, Inc.</a> Hosted by <a href="https://www.ovhcloud.com">OVHcloud</a>.
+</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

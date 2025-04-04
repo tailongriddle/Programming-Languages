@@ -1,0 +1,6 @@
+pandas.Series.list.len
+======================
+
+.. currentmodule:: pandas
+
+.. autoaccessormethod:: Series.list.len

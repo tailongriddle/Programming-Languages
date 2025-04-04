@@ -1,0 +1,86 @@
+pandas.tseries.offsets.YearEnd
+==============================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: YearEnd
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~YearEnd.base
+      
+      
+        ~YearEnd.freqstr
+      
+      
+        ~YearEnd.kwds
+      
+      
+        ~YearEnd.month
+      
+      
+        ~YearEnd.n
+      
+      
+        ~YearEnd.name
+      
+      
+        ~YearEnd.nanos
+      
+      
+        ~YearEnd.normalize
+      
+      
+        ~YearEnd.rule_code
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~YearEnd.copy
+      
+      
+        ~YearEnd.is_anchored
+      
+      
+        ~YearEnd.is_month_end
+      
+      
+        ~YearEnd.is_month_start
+      
+      
+        ~YearEnd.is_on_offset
+      
+      
+        ~YearEnd.is_quarter_end
+      
+      
+        ~YearEnd.is_quarter_start
+      
+      
+        ~YearEnd.is_year_end
+      
+      
+        ~YearEnd.is_year_start
+      
+      
+        ~YearEnd.rollback
+      
+      
+        ~YearEnd.rollforward
+      
+   
+   

@@ -1,0 +1,24 @@
+pandas.api.indexers.BaseIndexer
+===============================
+
+.. currentmodule:: pandas.api.indexers
+
+.. autoclass:: BaseIndexer
+
+   
+
+   
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~BaseIndexer.get_window_bounds
+      
+   
+   

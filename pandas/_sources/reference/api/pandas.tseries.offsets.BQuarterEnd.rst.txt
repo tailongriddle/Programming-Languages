@@ -1,0 +1,86 @@
+pandas.tseries.offsets.BQuarterEnd
+==================================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: BQuarterEnd
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~BQuarterEnd.base
+      
+      
+        ~BQuarterEnd.freqstr
+      
+      
+        ~BQuarterEnd.kwds
+      
+      
+        ~BQuarterEnd.n
+      
+      
+        ~BQuarterEnd.name
+      
+      
+        ~BQuarterEnd.nanos
+      
+      
+        ~BQuarterEnd.normalize
+      
+      
+        ~BQuarterEnd.rule_code
+      
+      
+        ~BQuarterEnd.startingMonth
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~BQuarterEnd.copy
+      
+      
+        ~BQuarterEnd.is_anchored
+      
+      
+        ~BQuarterEnd.is_month_end
+      
+      
+        ~BQuarterEnd.is_month_start
+      
+      
+        ~BQuarterEnd.is_on_offset
+      
+      
+        ~BQuarterEnd.is_quarter_end
+      
+      
+        ~BQuarterEnd.is_quarter_start
+      
+      
+        ~BQuarterEnd.is_year_end
+      
+      
+        ~BQuarterEnd.is_year_start
+      
+      
+        ~BQuarterEnd.rollback
+      
+      
+        ~BQuarterEnd.rollforward
+      
+   
+   

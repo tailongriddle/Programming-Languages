@@ -1,0 +1,6 @@
+pandas.Series.struct.dtypes
+===========================
+
+.. currentmodule:: pandas
+
+.. autoaccessorattribute:: Series.struct.dtypes
