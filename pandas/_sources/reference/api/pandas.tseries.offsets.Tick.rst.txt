@@ -1,0 +1,86 @@
+pandas.tseries.offsets.Tick
+===========================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: Tick
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~Tick.base
+      
+      
+        ~Tick.delta
+      
+      
+        ~Tick.freqstr
+      
+      
+        ~Tick.kwds
+      
+      
+        ~Tick.n
+      
+      
+        ~Tick.name
+      
+      
+        ~Tick.nanos
+      
+      
+        ~Tick.normalize
+      
+      
+        ~Tick.rule_code
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~Tick.copy
+      
+      
+        ~Tick.is_anchored
+      
+      
+        ~Tick.is_month_end
+      
+      
+        ~Tick.is_month_start
+      
+      
+        ~Tick.is_on_offset
+      
+      
+        ~Tick.is_quarter_end
+      
+      
+        ~Tick.is_quarter_start
+      
+      
+        ~Tick.is_year_end
+      
+      
+        ~Tick.is_year_start
+      
+      
+        ~Tick.rollback
+      
+      
+        ~Tick.rollforward
+      
+   
+   

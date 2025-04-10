@@ -1,0 +1,38 @@
+pandas.NamedAgg
+===============
+
+.. currentmodule:: pandas
+
+.. autoclass:: NamedAgg
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~NamedAgg.aggfunc
+      
+      
+        ~NamedAgg.column
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~NamedAgg.count
+      
+      
+        ~NamedAgg.index
+      
+   
+   

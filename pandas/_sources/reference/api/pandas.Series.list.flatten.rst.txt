@@ -1,0 +1,6 @@
+pandas.Series.list.flatten
+==========================
+
+.. currentmodule:: pandas
+
+.. autoaccessormethod:: Series.list.flatten

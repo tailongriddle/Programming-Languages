@@ -1,0 +1,83 @@
+pandas.tseries.offsets.DateOffset
+=================================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: DateOffset
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~DateOffset.base
+      
+      
+        ~DateOffset.freqstr
+      
+      
+        ~DateOffset.kwds
+      
+      
+        ~DateOffset.n
+      
+      
+        ~DateOffset.name
+      
+      
+        ~DateOffset.nanos
+      
+      
+        ~DateOffset.normalize
+      
+      
+        ~DateOffset.rule_code
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~DateOffset.copy
+      
+      
+        ~DateOffset.is_anchored
+      
+      
+        ~DateOffset.is_month_end
+      
+      
+        ~DateOffset.is_month_start
+      
+      
+        ~DateOffset.is_on_offset
+      
+      
+        ~DateOffset.is_quarter_end
+      
+      
+        ~DateOffset.is_quarter_start
+      
+      
+        ~DateOffset.is_year_end
+      
+      
+        ~DateOffset.is_year_start
+      
+      
+        ~DateOffset.rollback
+      
+      
+        ~DateOffset.rollforward
+      
+   
+   

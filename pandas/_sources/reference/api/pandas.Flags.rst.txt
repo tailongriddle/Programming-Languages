@@ -1,0 +1,29 @@
+pandas.Flags
+============
+
+.. currentmodule:: pandas
+
+.. autoclass:: Flags
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~Flags.allows_duplicate_labels
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+   
+   

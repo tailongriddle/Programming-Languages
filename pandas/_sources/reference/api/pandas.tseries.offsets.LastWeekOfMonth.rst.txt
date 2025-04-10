@@ -1,0 +1,89 @@
+pandas.tseries.offsets.LastWeekOfMonth
+======================================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: LastWeekOfMonth
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~LastWeekOfMonth.base
+      
+      
+        ~LastWeekOfMonth.freqstr
+      
+      
+        ~LastWeekOfMonth.kwds
+      
+      
+        ~LastWeekOfMonth.n
+      
+      
+        ~LastWeekOfMonth.name
+      
+      
+        ~LastWeekOfMonth.nanos
+      
+      
+        ~LastWeekOfMonth.normalize
+      
+      
+        ~LastWeekOfMonth.rule_code
+      
+      
+        ~LastWeekOfMonth.week
+      
+      
+        ~LastWeekOfMonth.weekday
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~LastWeekOfMonth.copy
+      
+      
+        ~LastWeekOfMonth.is_anchored
+      
+      
+        ~LastWeekOfMonth.is_month_end
+      
+      
+        ~LastWeekOfMonth.is_month_start
+      
+      
+        ~LastWeekOfMonth.is_on_offset
+      
+      
+        ~LastWeekOfMonth.is_quarter_end
+      
+      
+        ~LastWeekOfMonth.is_quarter_start
+      
+      
+        ~LastWeekOfMonth.is_year_end
+      
+      
+        ~LastWeekOfMonth.is_year_start
+      
+      
+        ~LastWeekOfMonth.rollback
+      
+      
+        ~LastWeekOfMonth.rollforward
+      
+   
+   

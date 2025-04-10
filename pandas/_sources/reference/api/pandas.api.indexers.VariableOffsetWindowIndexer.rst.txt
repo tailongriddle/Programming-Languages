@@ -1,0 +1,24 @@
+pandas.api.indexers.VariableOffsetWindowIndexer
+===============================================
+
+.. currentmodule:: pandas.api.indexers
+
+.. autoclass:: VariableOffsetWindowIndexer
+
+   
+
+   
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~VariableOffsetWindowIndexer.get_window_bounds
+      
+   
+   

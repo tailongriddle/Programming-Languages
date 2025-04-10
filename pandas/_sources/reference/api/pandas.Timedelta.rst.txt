@@ -1,0 +1,92 @@
+pandas.Timedelta
+================
+
+.. currentmodule:: pandas
+
+.. autoclass:: Timedelta
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~Timedelta.asm8
+      
+      
+        ~Timedelta.components
+      
+      
+        ~Timedelta.days
+      
+      
+        ~Timedelta.max
+      
+      
+        ~Timedelta.microseconds
+      
+      
+        ~Timedelta.min
+      
+      
+        ~Timedelta.nanoseconds
+      
+      
+        ~Timedelta.resolution
+      
+      
+        ~Timedelta.resolution_string
+      
+      
+        ~Timedelta.seconds
+      
+      
+        ~Timedelta.unit
+      
+      
+        ~Timedelta.value
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~Timedelta.as_unit
+      
+      
+        ~Timedelta.ceil
+      
+      
+        ~Timedelta.floor
+      
+      
+        ~Timedelta.isoformat
+      
+      
+        ~Timedelta.round
+      
+      
+        ~Timedelta.to_numpy
+      
+      
+        ~Timedelta.to_pytimedelta
+      
+      
+        ~Timedelta.to_timedelta64
+      
+      
+        ~Timedelta.total_seconds
+      
+      
+        ~Timedelta.view
+      
+   
+   

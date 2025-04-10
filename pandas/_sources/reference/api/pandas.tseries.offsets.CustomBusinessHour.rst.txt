@@ -1,0 +1,104 @@
+pandas.tseries.offsets.CustomBusinessHour
+=========================================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: CustomBusinessHour
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~CustomBusinessHour.base
+      
+      
+        ~CustomBusinessHour.calendar
+      
+      
+        ~CustomBusinessHour.end
+      
+      
+        ~CustomBusinessHour.freqstr
+      
+      
+        ~CustomBusinessHour.holidays
+      
+      
+        ~CustomBusinessHour.kwds
+      
+      
+        ~CustomBusinessHour.n
+      
+      
+        ~CustomBusinessHour.name
+      
+      
+        ~CustomBusinessHour.nanos
+      
+      
+        ~CustomBusinessHour.next_bday
+      
+      
+        ~CustomBusinessHour.normalize
+      
+      
+        ~CustomBusinessHour.offset
+      
+      
+        ~CustomBusinessHour.rule_code
+      
+      
+        ~CustomBusinessHour.start
+      
+      
+        ~CustomBusinessHour.weekmask
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~CustomBusinessHour.copy
+      
+      
+        ~CustomBusinessHour.is_anchored
+      
+      
+        ~CustomBusinessHour.is_month_end
+      
+      
+        ~CustomBusinessHour.is_month_start
+      
+      
+        ~CustomBusinessHour.is_on_offset
+      
+      
+        ~CustomBusinessHour.is_quarter_end
+      
+      
+        ~CustomBusinessHour.is_quarter_start
+      
+      
+        ~CustomBusinessHour.is_year_end
+      
+      
+        ~CustomBusinessHour.is_year_start
+      
+      
+        ~CustomBusinessHour.rollback
+      
+      
+        ~CustomBusinessHour.rollforward
+      
+   
+   

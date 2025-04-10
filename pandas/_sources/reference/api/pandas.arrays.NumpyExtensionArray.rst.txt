@@ -1,0 +1,6 @@
+pandas.arrays.NumpyExtensionArray
+=================================
+
+.. currentmodule:: pandas.arrays
+
+.. autoclass:: NumpyExtensionArray

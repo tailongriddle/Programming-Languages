@@ -1,0 +1,1016 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pandas.read_excel &#8212; pandas 2.2.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css?v=150e0881" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/pandas.css?v=b7db95b1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js?v=219dea72"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/api/pandas.read_excel';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.pydata.org/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.2';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.to_excel" href="pandas.DataFrame.to_excel.html" />
+    <link rel="prev" title="pandas.DataFrame.to_clipboard" href="pandas.DataFrame.to_clipboard.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.2.2 documentation - Home"/>
+    <script>document.write(`<img src="https://pandas.pydata.org/static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.2.2 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">
+                        Development
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">
+                        Release notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">
+                        Development
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">
+                        Release notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../io.html">Input/output</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_pickle.html">pandas.read_pickle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.DataFrame.to_pickle.html">pandas.DataFrame.to_pickle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_table.html">pandas.read_table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_csv.html">pandas.read_csv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.DataFrame.to_csv.html">pandas.DataFrame.to_csv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_fwf.html">pandas.read_fwf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_clipboard.html">pandas.read_clipboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.DataFrame.to_clipboard.html">pandas.DataFrame.to_clipboard</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">pandas.read_excel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.DataFrame.to_excel.html">pandas.DataFrame.to_excel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.ExcelFile.html">pandas.ExcelFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.ExcelFile.book.html">pandas.ExcelFile.book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.ExcelFile.sheet_names.html">pandas.ExcelFile.sheet_names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.ExcelFile.parse.html">pandas.ExcelFile.parse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.io.formats.style.Styler.to_excel.html">pandas.io.formats.style.Styler.to_excel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.ExcelWriter.html">pandas.ExcelWriter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_json.html">pandas.read_json</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.json_normalize.html">pandas.json_normalize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.DataFrame.to_json.html">pandas.DataFrame.to_json</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.io.json.build_table_schema.html">pandas.io.json.build_table_schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_html.html">pandas.read_html</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.DataFrame.to_html.html">pandas.DataFrame.to_html</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.io.formats.style.Styler.to_html.html">pandas.io.formats.style.Styler.to_html</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_xml.html">pandas.read_xml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.DataFrame.to_xml.html">pandas.DataFrame.to_xml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.DataFrame.to_latex.html">pandas.DataFrame.to_latex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.io.formats.style.Styler.to_latex.html">pandas.io.formats.style.Styler.to_latex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_hdf.html">pandas.read_hdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.HDFStore.put.html">pandas.HDFStore.put</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.HDFStore.append.html">pandas.HDFStore.append</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.HDFStore.get.html">pandas.HDFStore.get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.HDFStore.select.html">pandas.HDFStore.select</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.HDFStore.info.html">pandas.HDFStore.info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.HDFStore.keys.html">pandas.HDFStore.keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.HDFStore.groups.html">pandas.HDFStore.groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.HDFStore.walk.html">pandas.HDFStore.walk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_feather.html">pandas.read_feather</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.DataFrame.to_feather.html">pandas.DataFrame.to_feather</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_parquet.html">pandas.read_parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.DataFrame.to_parquet.html">pandas.DataFrame.to_parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_orc.html">pandas.read_orc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.DataFrame.to_orc.html">pandas.DataFrame.to_orc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_sas.html">pandas.read_sas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_spss.html">pandas.read_spss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_sql_table.html">pandas.read_sql_table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_sql_query.html">pandas.read_sql_query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_sql.html">pandas.read_sql</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.DataFrame.to_sql.html">pandas.DataFrame.to_sql</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_gbq.html">pandas.read_gbq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.read_stata.html">pandas.read_stata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.DataFrame.to_stata.html">pandas.DataFrame.to_stata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.io.stata.StataReader.data_label.html">pandas.io.stata.StataReader.data_label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.io.stata.StataReader.value_labels.html">pandas.io.stata.StataReader.value_labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.io.stata.StataReader.variable_labels.html">pandas.io.stata.StataReader.variable_labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.io.stata.StataWriter.write_file.html">pandas.io.stata.StataWriter.write_file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../series.html">Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arrays.html">pandas arrays, scalars, and data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../indexing.html">Index objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../offset_frequency.html">Date offsets</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../window.html">Window</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../groupby.html">GroupBy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resampling.html">Resampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../style.html">Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../options.html">Options and settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extensions.html">Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../missing_value.html">Missing values</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../io.html" class="nav-link">Input/output</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">pandas.read_excel</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="pandas-read-excel">
+<h1>pandas.read_excel<a class="headerlink" href="#pandas-read-excel" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="pandas.read_excel">
+<span class="sig-prename descclassname"><span class="pre">pandas.</span></span><span class="sig-name descname"><span class="pre">read_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">io</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usecols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">true_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">false_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skiprows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">na_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_default_na</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">na_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_dates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">_NoDefault.no_default</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thousands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipfooter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype_backend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">_NoDefault.no_default</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/pandas-dev/pandas/blob/v2.2.2/pandas/io/excel/_base.py#L451-L537"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandas.read_excel" title="Link to this definition">#</a></dt>
+<dd><p>Read an Excel file into a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
+<p>Supports <cite>xls</cite>, <cite>xlsx</cite>, <cite>xlsm</cite>, <cite>xlsb</cite>, <cite>odf</cite>, <cite>ods</cite> and <cite>odt</cite> file extensions
+read from a local filesystem or URL. Supports an option to read
+a single sheet or a list of sheets.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>io</strong><span class="classifier">str, bytes, ExcelFile, xlrd.Book, path object, or file-like object</span></dt><dd><p>Any valid string path is acceptable. The string could be a URL. Valid
+URL schemes include http, ftp, s3, and file. For file URLs, a host is
+expected. A local file could be: <code class="docutils literal notranslate"><span class="pre">file://localhost/path/to/table.xlsx</span></code>.</p>
+<p>If you want to pass in a path object, pandas accepts any <code class="docutils literal notranslate"><span class="pre">os.PathLike</span></code>.</p>
+<p>By file-like object, we refer to objects with a <code class="docutils literal notranslate"><span class="pre">read()</span></code> method,
+such as a file handle (e.g. via builtin <code class="docutils literal notranslate"><span class="pre">open</span></code> function)
+or <code class="docutils literal notranslate"><span class="pre">StringIO</span></code>.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 2.1.0: </span>Passing byte strings is deprecated. To read from a
+byte string, wrap it in a <code class="docutils literal notranslate"><span class="pre">BytesIO</span></code> object.</p>
+</div>
+</dd>
+<dt><strong>sheet_name</strong><span class="classifier">str, int, list, or None, default 0</span></dt><dd><p>Strings are used for sheet names. Integers are used in zero-indexed
+sheet positions (chart sheets do not count as a sheet position).
+Lists of strings/integers are used to request multiple sheets.
+Specify <code class="docutils literal notranslate"><span class="pre">None</span></code> to get all worksheets.</p>
+<p>Available cases:</p>
+<ul class="simple">
+<li><p>Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>: 1st sheet as a <cite>DataFrame</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code>: 2nd sheet as a <cite>DataFrame</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Sheet1&quot;</span></code>: Load sheet with name “Sheet1”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">&quot;Sheet5&quot;]</span></code>: Load first, second and sheet named “Sheet5”
+as a dict of <cite>DataFrame</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>: All worksheets.</p></li>
+</ul>
+</dd>
+<dt><strong>header</strong><span class="classifier">int, list of int, default 0</span></dt><dd><p>Row (0-indexed) to use for the column labels of the parsed
+DataFrame. If a list of integers is passed those row positions will
+be combined into a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>. Use None if there is no header.</p>
+</dd>
+<dt><strong>names</strong><span class="classifier">array-like, default None</span></dt><dd><p>List of column names to use. If file contains no header row,
+then you should explicitly pass header=None.</p>
+</dd>
+<dt><strong>index_col</strong><span class="classifier">int, str, list of int, default None</span></dt><dd><p>Column (0-indexed) to use as the row labels of the DataFrame.
+Pass None if there is no such column.  If a list is passed,
+those columns will be combined into a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>.  If a
+subset of data is selected with <code class="docutils literal notranslate"><span class="pre">usecols</span></code>, index_col
+is based on the subset.</p>
+<p>Missing values will be forward filled to allow roundtripping with
+<code class="docutils literal notranslate"><span class="pre">to_excel</span></code> for <code class="docutils literal notranslate"><span class="pre">merged_cells=True</span></code>. To avoid forward filling the
+missing values use <code class="docutils literal notranslate"><span class="pre">set_index</span></code> after reading the data instead of
+<code class="docutils literal notranslate"><span class="pre">index_col</span></code>.</p>
+</dd>
+<dt><strong>usecols</strong><span class="classifier">str, list-like, or callable, default None</span></dt><dd><ul class="simple">
+<li><p>If None, then parse all columns.</p></li>
+<li><p>If str, then indicates comma separated list of Excel column letters
+and column ranges (e.g. “A:E” or “A,C,E:F”). Ranges are inclusive of
+both sides.</p></li>
+<li><p>If list of int, then indicates list of column numbers to be parsed
+(0-indexed).</p></li>
+<li><p>If list of string, then indicates list of column names to be parsed.</p></li>
+<li><p>If callable, then evaluate each column name against it and parse the
+column if the callable returns <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+<p>Returns a subset of the columns according to behavior above.</p>
+</dd>
+<dt><strong>dtype</strong><span class="classifier">Type name or dict of column -&gt; type, default None</span></dt><dd><p>Data type for data or columns. E.g. {‘a’: np.float64, ‘b’: np.int32}
+Use <code class="docutils literal notranslate"><span class="pre">object</span></code> to preserve data as stored in Excel and not interpret dtype,
+which will necessarily result in <code class="docutils literal notranslate"><span class="pre">object</span></code> dtype.
+If converters are specified, they will be applied INSTEAD
+of dtype conversion.
+If you use <code class="docutils literal notranslate"><span class="pre">None</span></code>, it will infer the dtype of each column based on the data.</p>
+</dd>
+<dt><strong>engine</strong><span class="classifier">{‘openpyxl’, ‘calamine’, ‘odf’, ‘pyxlsb’, ‘xlrd’}, default None</span></dt><dd><p>If io is not a buffer or path, this must be set to identify io.
+Engine compatibility :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">openpyxl</span></code> supports newer Excel file formats.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">calamine</span></code> supports Excel (.xls, .xlsx, .xlsm, .xlsb)
+and OpenDocument (.ods) file formats.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">odf</span></code> supports OpenDocument file formats (.odf, .ods, .odt).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pyxlsb</span></code> supports Binary Excel files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xlrd</span></code> supports old-style Excel files (.xls).</p></li>
+</ul>
+<p>When <code class="docutils literal notranslate"><span class="pre">engine=None</span></code>, the following logic will be used to determine the engine:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">path_or_buffer</span></code> is an OpenDocument format (.odf, .ods, .odt),
+then <a class="reference external" href="https://pypi.org/project/odfpy/">odf</a> will be used.</p></li>
+<li><p>Otherwise if <code class="docutils literal notranslate"><span class="pre">path_or_buffer</span></code> is an xls format, <code class="docutils literal notranslate"><span class="pre">xlrd</span></code> will be used.</p></li>
+<li><p>Otherwise if <code class="docutils literal notranslate"><span class="pre">path_or_buffer</span></code> is in xlsb format, <code class="docutils literal notranslate"><span class="pre">pyxlsb</span></code> will be used.</p></li>
+<li><p>Otherwise <code class="docutils literal notranslate"><span class="pre">openpyxl</span></code> will be used.</p></li>
+</ul>
+</dd>
+<dt><strong>converters</strong><span class="classifier">dict, default None</span></dt><dd><p>Dict of functions for converting values in certain columns. Keys can
+either be integers or column labels, values are functions that take one
+input argument, the Excel cell content, and return the transformed
+content.</p>
+</dd>
+<dt><strong>true_values</strong><span class="classifier">list, default None</span></dt><dd><p>Values to consider as True.</p>
+</dd>
+<dt><strong>false_values</strong><span class="classifier">list, default None</span></dt><dd><p>Values to consider as False.</p>
+</dd>
+<dt><strong>skiprows</strong><span class="classifier">list-like, int, or callable, optional</span></dt><dd><p>Line numbers to skip (0-indexed) or number of lines to skip (int) at the
+start of the file. If callable, the callable function will be evaluated
+against the row indices, returning True if the row should be skipped and
+False otherwise. An example of a valid callable argument would be <code class="docutils literal notranslate"><span class="pre">lambda</span>
+<span class="pre">x:</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">[0,</span> <span class="pre">2]</span></code>.</p>
+</dd>
+<dt><strong>nrows</strong><span class="classifier">int, default None</span></dt><dd><p>Number of rows to parse.</p>
+</dd>
+<dt><strong>na_values</strong><span class="classifier">scalar, str, list-like, or dict, default None</span></dt><dd><p>Additional strings to recognize as NA/NaN. If dict passed, specific
+per-column NA values. By default the following values are interpreted
+as NaN: ‘’, ‘#N/A’, ‘#N/A N/A’, ‘#NA’, ‘-1.#IND’, ‘-1.#QNAN’, ‘-NaN’, ‘-nan’,
+‘1.#IND’, ‘1.#QNAN’, ‘&lt;NA&gt;’, ‘N/A’, ‘NA’, ‘NULL’, ‘NaN’, ‘None’,
+‘n/a’, ‘nan’, ‘null’.</p>
+</dd>
+<dt><strong>keep_default_na</strong><span class="classifier">bool, default True</span></dt><dd><p>Whether or not to include the default NaN values when parsing the data.
+Depending on whether <code class="docutils literal notranslate"><span class="pre">na_values</span></code> is passed in, the behavior is as follows:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">keep_default_na</span></code> is True, and <code class="docutils literal notranslate"><span class="pre">na_values</span></code> are specified,
+<code class="docutils literal notranslate"><span class="pre">na_values</span></code> is appended to the default NaN values used for parsing.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">keep_default_na</span></code> is True, and <code class="docutils literal notranslate"><span class="pre">na_values</span></code> are not specified, only
+the default NaN values are used for parsing.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">keep_default_na</span></code> is False, and <code class="docutils literal notranslate"><span class="pre">na_values</span></code> are specified, only
+the NaN values specified <code class="docutils literal notranslate"><span class="pre">na_values</span></code> are used for parsing.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">keep_default_na</span></code> is False, and <code class="docutils literal notranslate"><span class="pre">na_values</span></code> are not specified, no
+strings will be parsed as NaN.</p></li>
+</ul>
+<p>Note that if <cite>na_filter</cite> is passed in as False, the <code class="docutils literal notranslate"><span class="pre">keep_default_na</span></code> and
+<code class="docutils literal notranslate"><span class="pre">na_values</span></code> parameters will be ignored.</p>
+</dd>
+<dt><strong>na_filter</strong><span class="classifier">bool, default True</span></dt><dd><p>Detect missing value markers (empty strings and the value of na_values). In
+data without any NAs, passing <code class="docutils literal notranslate"><span class="pre">na_filter=False</span></code> can improve the
+performance of reading a large file.</p>
+</dd>
+<dt><strong>verbose</strong><span class="classifier">bool, default False</span></dt><dd><p>Indicate number of NA values placed in non-numeric columns.</p>
+</dd>
+<dt><strong>parse_dates</strong><span class="classifier">bool, list-like, or dict, default False</span></dt><dd><p>The behavior is as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">bool</span></code>. If True -&gt; try parsing the index.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code> of int or names. e.g. If [1, 2, 3] -&gt; try parsing columns 1, 2, 3
+each as a separate date column.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code> of lists. e.g.  If [[1, 3]] -&gt; combine columns 1 and 3 and parse as
+a single date column.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dict</span></code>, e.g. {‘foo’ : [1, 3]} -&gt; parse columns 1, 3 as date and call
+result ‘foo’</p></li>
+</ul>
+<p>If a column or index contains an unparsable date, the entire column or
+index will be returned unaltered as an object data type. If you don`t want to
+parse some cells as date just change their type in Excel to “Text”.
+For non-standard datetime parsing, use <code class="docutils literal notranslate"><span class="pre">pd.to_datetime</span></code> after <code class="docutils literal notranslate"><span class="pre">pd.read_excel</span></code>.</p>
+<p>Note: A fast-path exists for iso8601-formatted dates.</p>
+</dd>
+<dt><strong>date_parser</strong><span class="classifier">function, optional</span></dt><dd><p>Function to use for converting a sequence of string columns to an array of
+datetime instances. The default uses <code class="docutils literal notranslate"><span class="pre">dateutil.parser.parser</span></code> to do the
+conversion. Pandas will try to call <cite>date_parser</cite> in three different ways,
+advancing to the next if an exception occurs: 1) Pass one or more arrays
+(as defined by <cite>parse_dates</cite>) as arguments; 2) concatenate (row-wise) the
+string values from the columns defined by <cite>parse_dates</cite> into a single array
+and pass that; and 3) call <cite>date_parser</cite> once for each row using one or
+more strings (corresponding to the columns defined by <cite>parse_dates</cite>) as
+arguments.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 2.0.0: </span>Use <code class="docutils literal notranslate"><span class="pre">date_format</span></code> instead, or read in as <code class="docutils literal notranslate"><span class="pre">object</span></code> and then apply
+<a class="reference internal" href="pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_datetime()</span></code></a> as-needed.</p>
+</div>
+</dd>
+<dt><strong>date_format</strong><span class="classifier">str or dict of column -&gt; format, default <code class="docutils literal notranslate"><span class="pre">None</span></code></span></dt><dd><p>If used in conjunction with <code class="docutils literal notranslate"><span class="pre">parse_dates</span></code>, will parse dates according to this
+format. For anything more complex,
+please read in as <code class="docutils literal notranslate"><span class="pre">object</span></code> and then apply <a class="reference internal" href="pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_datetime()</span></code></a> as-needed.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 2.0.0.</span></p>
+</div>
+</dd>
+<dt><strong>thousands</strong><span class="classifier">str, default None</span></dt><dd><p>Thousands separator for parsing string columns to numeric.  Note that
+this parameter is only necessary for columns stored as TEXT in Excel,
+any numeric columns will automatically be parsed, regardless of display
+format.</p>
+</dd>
+<dt><strong>decimal</strong><span class="classifier">str, default ‘.’</span></dt><dd><p>Character to recognize as decimal point for parsing string columns to numeric.
+Note that this parameter is only necessary for columns stored as TEXT in Excel,
+any numeric columns will automatically be parsed, regardless of display
+format.(e.g. use ‘,’ for European data).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.4.0.</span></p>
+</div>
+</dd>
+<dt><strong>comment</strong><span class="classifier">str, default None</span></dt><dd><p>Comments out remainder of line. Pass a character or characters to this
+argument to indicate comments in the input file. Any data between the
+comment string and the end of the current line is ignored.</p>
+</dd>
+<dt><strong>skipfooter</strong><span class="classifier">int, default 0</span></dt><dd><p>Rows at the end to skip (0-indexed).</p>
+</dd>
+<dt><strong>storage_options</strong><span class="classifier">dict, optional</span></dt><dd><p>Extra options that make sense for a particular storage connection, e.g.
+host, port, username, password, etc. For HTTP(S) URLs the key-value pairs
+are forwarded to <code class="docutils literal notranslate"><span class="pre">urllib.request.Request</span></code> as header options. For other
+URLs (e.g. starting with “s3://”, and “gcs://”) the key-value pairs are
+forwarded to <code class="docutils literal notranslate"><span class="pre">fsspec.open</span></code>. Please see <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> and <code class="docutils literal notranslate"><span class="pre">urllib</span></code> for more
+details, and for more examples on storage options refer <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/io.html?highlight=storage_options#reading-writing-remote-files">here</a>.</p>
+</dd>
+<dt><strong>dtype_backend</strong><span class="classifier">{‘numpy_nullable’, ‘pyarrow’}, default ‘numpy_nullable’</span></dt><dd><p>Back-end data type applied to the resultant <a class="reference internal" href="pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>
+(still experimental). Behaviour is as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;numpy_nullable&quot;</span></code>: returns nullable-dtype-backed <a class="reference internal" href="pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>
+(default).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;pyarrow&quot;</span></code>: returns pyarrow-backed nullable <a class="reference internal" href="pandas.ArrowDtype.html#pandas.ArrowDtype" title="pandas.ArrowDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrowDtype</span></code></a>
+DataFrame.</p></li>
+</ul>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 2.0.</span></p>
+</div>
+</dd>
+<dt><strong>engine_kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Arbitrary keyword arguments passed to excel engine.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame or dict of DataFrames</dt><dd><p>DataFrame from the passed in Excel file. See notes in sheet_name
+argument for more information on when a dict of DataFrames is returned.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.to_excel.html#pandas.DataFrame.to_excel" title="pandas.DataFrame.to_excel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_excel</span></code></a></dt><dd><p>Write DataFrame to an Excel file.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv" title="pandas.DataFrame.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_csv</span></code></a></dt><dd><p>Write DataFrame to a comma-separated values (csv) file.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_csv</span></code></a></dt><dd><p>Read a comma-separated values (csv) file into DataFrame.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.read_fwf.html#pandas.read_fwf" title="pandas.read_fwf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_fwf</span></code></a></dt><dd><p>Read a table of fixed-width formatted lines into DataFrame.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>For specific information on the methods used for each Excel engine, refer to the pandas
+<a class="reference internal" href="../../user_guide/io.html#io-excel-reader"><span class="std std-ref">user guide</span></a></p>
+<p class="rubric">Examples</p>
+<p>The file can be read using the file name as string or an open file object:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  
+<span class="go">       Name  Value</span>
+<span class="go">0   string1      1</span>
+<span class="go">1   string2      2</span>
+<span class="go">2  #Comment      3</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">),</span>
+<span class="gp">... </span>              <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet3&#39;</span><span class="p">)</span>  
+<span class="go">   Unnamed: 0      Name  Value</span>
+<span class="go">0           0   string1      1</span>
+<span class="go">1           1   string2      2</span>
+<span class="go">2           2  #Comment      3</span>
+</pre></div>
+</div>
+<p>Index and header can be specified via the <cite>index_col</cite> and <cite>header</cite> arguments</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>  
+<span class="go">     0         1      2</span>
+<span class="go">0  NaN      Name  Value</span>
+<span class="go">1  0.0   string1      1</span>
+<span class="go">2  1.0   string2      2</span>
+<span class="go">3  2.0  #Comment      3</span>
+</pre></div>
+</div>
+<p>Column types are inferred but can be explicitly specified</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">})</span>  
+<span class="go">       Name  Value</span>
+<span class="go">0   string1    1.0</span>
+<span class="go">1   string2    2.0</span>
+<span class="go">2  #Comment    3.0</span>
+</pre></div>
+</div>
+<p>True, False, and NA values, and thousands separators have defaults,
+but can be explicitly specified, too. Supply the values you would like
+as strings or lists of strings!</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;string1&#39;</span><span class="p">,</span> <span class="s1">&#39;string2&#39;</span><span class="p">])</span>  
+<span class="go">       Name  Value</span>
+<span class="go">0       NaN      1</span>
+<span class="go">1       NaN      2</span>
+<span class="go">2  #Comment      3</span>
+</pre></div>
+</div>
+<p>Comment lines in the excel input file can be skipped using the
+<code class="docutils literal notranslate"><span class="pre">comment</span></code> kwarg.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>  
+<span class="go">      Name  Value</span>
+<span class="go">0  string1    1.0</span>
+<span class="go">1  string2    2.0</span>
+<span class="go">2     None    NaN</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="pandas.DataFrame.to_clipboard.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">pandas.DataFrame.to_clipboard</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pandas.DataFrame.to_excel.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pandas.DataFrame.to_excel</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas.read_excel"><code class="docutils literal notranslate"><span class="pre">read_excel()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/reference/api/pandas.read_excel.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">
+    &copy 2024, pandas via <a href="https://numfocus.org">NumFOCUS, Inc.</a> Hosted by <a href="https://www.ovhcloud.com">OVHcloud</a>.
+</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

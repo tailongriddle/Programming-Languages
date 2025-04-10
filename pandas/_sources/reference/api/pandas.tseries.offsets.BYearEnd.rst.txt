@@ -1,0 +1,86 @@
+pandas.tseries.offsets.BYearEnd
+===============================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: BYearEnd
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~BYearEnd.base
+      
+      
+        ~BYearEnd.freqstr
+      
+      
+        ~BYearEnd.kwds
+      
+      
+        ~BYearEnd.month
+      
+      
+        ~BYearEnd.n
+      
+      
+        ~BYearEnd.name
+      
+      
+        ~BYearEnd.nanos
+      
+      
+        ~BYearEnd.normalize
+      
+      
+        ~BYearEnd.rule_code
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~BYearEnd.copy
+      
+      
+        ~BYearEnd.is_anchored
+      
+      
+        ~BYearEnd.is_month_end
+      
+      
+        ~BYearEnd.is_month_start
+      
+      
+        ~BYearEnd.is_on_offset
+      
+      
+        ~BYearEnd.is_quarter_end
+      
+      
+        ~BYearEnd.is_quarter_start
+      
+      
+        ~BYearEnd.is_year_end
+      
+      
+        ~BYearEnd.is_year_start
+      
+      
+        ~BYearEnd.rollback
+      
+      
+        ~BYearEnd.rollforward
+      
+   
+   

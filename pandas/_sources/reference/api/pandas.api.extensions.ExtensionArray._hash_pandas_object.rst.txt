@@ -1,0 +1,6 @@
+pandas.api.extensions.ExtensionArray.\_hash\_pandas\_object
+===========================================================
+
+.. currentmodule:: pandas.api.extensions
+
+.. automethod:: ExtensionArray._hash_pandas_object

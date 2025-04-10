@@ -1,0 +1,86 @@
+pandas.tseries.offsets.Hour
+===========================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: Hour
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~Hour.base
+      
+      
+        ~Hour.delta
+      
+      
+        ~Hour.freqstr
+      
+      
+        ~Hour.kwds
+      
+      
+        ~Hour.n
+      
+      
+        ~Hour.name
+      
+      
+        ~Hour.nanos
+      
+      
+        ~Hour.normalize
+      
+      
+        ~Hour.rule_code
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~Hour.copy
+      
+      
+        ~Hour.is_anchored
+      
+      
+        ~Hour.is_month_end
+      
+      
+        ~Hour.is_month_start
+      
+      
+        ~Hour.is_on_offset
+      
+      
+        ~Hour.is_quarter_end
+      
+      
+        ~Hour.is_quarter_start
+      
+      
+        ~Hour.is_year_end
+      
+      
+        ~Hour.is_year_start
+      
+      
+        ~Hour.rollback
+      
+      
+        ~Hour.rollforward
+      
+   
+   

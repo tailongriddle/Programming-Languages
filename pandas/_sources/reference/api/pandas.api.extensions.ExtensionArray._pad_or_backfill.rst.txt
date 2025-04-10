@@ -1,0 +1,6 @@
+pandas.api.extensions.ExtensionArray.\_pad\_or\_backfill
+========================================================
+
+.. currentmodule:: pandas.api.extensions
+
+.. automethod:: ExtensionArray._pad_or_backfill

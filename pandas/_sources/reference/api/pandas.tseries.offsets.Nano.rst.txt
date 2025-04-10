@@ -1,0 +1,86 @@
+pandas.tseries.offsets.Nano
+===========================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: Nano
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~Nano.base
+      
+      
+        ~Nano.delta
+      
+      
+        ~Nano.freqstr
+      
+      
+        ~Nano.kwds
+      
+      
+        ~Nano.n
+      
+      
+        ~Nano.name
+      
+      
+        ~Nano.nanos
+      
+      
+        ~Nano.normalize
+      
+      
+        ~Nano.rule_code
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~Nano.copy
+      
+      
+        ~Nano.is_anchored
+      
+      
+        ~Nano.is_month_end
+      
+      
+        ~Nano.is_month_start
+      
+      
+        ~Nano.is_on_offset
+      
+      
+        ~Nano.is_quarter_end
+      
+      
+        ~Nano.is_quarter_start
+      
+      
+        ~Nano.is_year_end
+      
+      
+        ~Nano.is_year_start
+      
+      
+        ~Nano.rollback
+      
+      
+        ~Nano.rollforward
+      
+   
+   

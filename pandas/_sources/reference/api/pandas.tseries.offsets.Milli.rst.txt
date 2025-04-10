@@ -1,0 +1,86 @@
+pandas.tseries.offsets.Milli
+============================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: Milli
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~Milli.base
+      
+      
+        ~Milli.delta
+      
+      
+        ~Milli.freqstr
+      
+      
+        ~Milli.kwds
+      
+      
+        ~Milli.n
+      
+      
+        ~Milli.name
+      
+      
+        ~Milli.nanos
+      
+      
+        ~Milli.normalize
+      
+      
+        ~Milli.rule_code
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~Milli.copy
+      
+      
+        ~Milli.is_anchored
+      
+      
+        ~Milli.is_month_end
+      
+      
+        ~Milli.is_month_start
+      
+      
+        ~Milli.is_on_offset
+      
+      
+        ~Milli.is_quarter_end
+      
+      
+        ~Milli.is_quarter_start
+      
+      
+        ~Milli.is_year_end
+      
+      
+        ~Milli.is_year_start
+      
+      
+        ~Milli.rollback
+      
+      
+        ~Milli.rollforward
+      
+   
+   

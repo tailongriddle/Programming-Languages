@@ -1,0 +1,59 @@
+pandas.Interval
+===============
+
+.. currentmodule:: pandas
+
+.. autoclass:: Interval
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~Interval.closed
+      
+      
+        ~Interval.closed_left
+      
+      
+        ~Interval.closed_right
+      
+      
+        ~Interval.is_empty
+      
+      
+        ~Interval.left
+      
+      
+        ~Interval.length
+      
+      
+        ~Interval.mid
+      
+      
+        ~Interval.open_left
+      
+      
+        ~Interval.open_right
+      
+      
+        ~Interval.right
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~Interval.overlaps
+      
+   
+   

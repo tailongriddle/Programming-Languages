@@ -1,0 +1,53 @@
+pandas.ExcelWriter
+==================
+
+.. currentmodule:: pandas
+
+.. autoclass:: ExcelWriter
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~ExcelWriter.book
+      
+      
+        ~ExcelWriter.date_format
+      
+      
+        ~ExcelWriter.datetime_format
+      
+      
+        ~ExcelWriter.engine
+      
+      
+        ~ExcelWriter.if_sheet_exists
+      
+      
+        ~ExcelWriter.sheets
+      
+      
+        ~ExcelWriter.supported_extensions
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~ExcelWriter.check_extension
+      
+      
+        ~ExcelWriter.close
+      
+   
+   

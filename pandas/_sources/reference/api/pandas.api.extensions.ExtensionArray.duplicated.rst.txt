@@ -1,0 +1,6 @@
+pandas.api.extensions.ExtensionArray.duplicated
+===============================================
+
+.. currentmodule:: pandas.api.extensions
+
+.. automethod:: ExtensionArray.duplicated

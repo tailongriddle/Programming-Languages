@@ -1,0 +1,38 @@
+pandas.ExcelFile
+================
+
+.. currentmodule:: pandas
+
+.. autoclass:: ExcelFile
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~ExcelFile.book
+      
+      
+        ~ExcelFile.sheet_names
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~ExcelFile.close
+      
+      
+        ~ExcelFile.parse
+      
+   
+   

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+    <title>SageMath App</title>
+    <background alignment="bottomleft" file="sagelogo.png" mime-type="image/png" scaling="none"/>
+    <welcome file="Welcome.rtf" mime-type="text/richtext"/>
+    <options customize="allow" require-scripts="false" rootVolumeOnly="true" hostArchitectures="arm64,x86_64"/>
+    <choices-outline>
+        <line choice="org.computop.SageMath-{{ sage_version }}.bin"/>
+        <line choice="org.computop.SageMath-{{ sage_version }}.share"/>
+        <line choice="org.computop.SageMath-{{ sage_version }}.texlive"/>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="org.computop.SageMath-{{ sage_version }}.bin" title="Sage Script"
+	    description="Creates /usr/local/bin/sage">
+        <pkg-ref id="org.computop.SageMath-{{ sage_version }}.bin"/>
+    </choice>
+    <choice id="org.computop.SageMath-{{ sage_version }}.share" title="Jupyter"
+	    description="Creates /usr/local/share/jupyter/">
+        <pkg-ref id="org.computop.SageMath-{{ sage_version }}.share"/>
+    </choice>
+    <choice id="org.computop.SageMath-{{ sage_version }}.texlive" title="SageTeX"
+	    description="Creates /usr/local/texlive/texmf-local/tex/latex/local/sagetex.sty">
+        <pkg-ref id="org.computop.SageMath-{{ sage_version }}.texlive"/>
+    </choice>
+    <pkg-ref id="org.computop.SageMath-{{ sage_version }}.bin" version="{{ sage_version }}"
+	     auth="Root" onConclusion="none" installKBytes="0">#SageMath_bin.pkg</pkg-ref>
+    <pkg-ref id="org.computop.SageMath-{{ sage_version }}.share" version="{{ sage_version }}"
+	     auth="Root" onConclusion="none" installKBytes="0">#SageMath_share.pkg</pkg-ref>
+    <pkg-ref id="org.computop.SageMath-{{ sage_version }}.texlive" version="{{ sage_version }}"
+	     auth="Root" onConclusion="none" installKBytes="0">#SageMath_texlive.pkg</pkg-ref>
+</installer-gui-script>

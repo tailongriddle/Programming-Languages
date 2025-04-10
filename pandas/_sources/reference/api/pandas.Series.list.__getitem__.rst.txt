@@ -1,0 +1,6 @@
+pandas.Series.list.__getitem__
+==============================
+
+.. currentmodule:: pandas
+
+.. autoaccessormethod:: Series.list.__getitem__

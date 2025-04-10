@@ -1,0 +1,83 @@
+pandas.tseries.offsets.BusinessMonthEnd
+=======================================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: BusinessMonthEnd
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~BusinessMonthEnd.base
+      
+      
+        ~BusinessMonthEnd.freqstr
+      
+      
+        ~BusinessMonthEnd.kwds
+      
+      
+        ~BusinessMonthEnd.n
+      
+      
+        ~BusinessMonthEnd.name
+      
+      
+        ~BusinessMonthEnd.nanos
+      
+      
+        ~BusinessMonthEnd.normalize
+      
+      
+        ~BusinessMonthEnd.rule_code
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~BusinessMonthEnd.copy
+      
+      
+        ~BusinessMonthEnd.is_anchored
+      
+      
+        ~BusinessMonthEnd.is_month_end
+      
+      
+        ~BusinessMonthEnd.is_month_start
+      
+      
+        ~BusinessMonthEnd.is_on_offset
+      
+      
+        ~BusinessMonthEnd.is_quarter_end
+      
+      
+        ~BusinessMonthEnd.is_quarter_start
+      
+      
+        ~BusinessMonthEnd.is_year_end
+      
+      
+        ~BusinessMonthEnd.is_year_start
+      
+      
+        ~BusinessMonthEnd.rollback
+      
+      
+        ~BusinessMonthEnd.rollforward
+      
+   
+   

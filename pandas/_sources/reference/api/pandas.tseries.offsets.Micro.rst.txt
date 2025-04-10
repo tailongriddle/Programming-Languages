@@ -1,0 +1,86 @@
+pandas.tseries.offsets.Micro
+============================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: Micro
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~Micro.base
+      
+      
+        ~Micro.delta
+      
+      
+        ~Micro.freqstr
+      
+      
+        ~Micro.kwds
+      
+      
+        ~Micro.n
+      
+      
+        ~Micro.name
+      
+      
+        ~Micro.nanos
+      
+      
+        ~Micro.normalize
+      
+      
+        ~Micro.rule_code
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~Micro.copy
+      
+      
+        ~Micro.is_anchored
+      
+      
+        ~Micro.is_month_end
+      
+      
+        ~Micro.is_month_start
+      
+      
+        ~Micro.is_on_offset
+      
+      
+        ~Micro.is_quarter_end
+      
+      
+        ~Micro.is_quarter_start
+      
+      
+        ~Micro.is_year_end
+      
+      
+        ~Micro.is_year_start
+      
+      
+        ~Micro.rollback
+      
+      
+        ~Micro.rollforward
+      
+   
+   

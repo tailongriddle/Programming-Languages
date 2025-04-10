@@ -1,0 +1,104 @@
+pandas.tseries.offsets.CustomBusinessMonthEnd
+=============================================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: CustomBusinessMonthEnd
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~CustomBusinessMonthEnd.base
+      
+      
+        ~CustomBusinessMonthEnd.calendar
+      
+      
+        ~CustomBusinessMonthEnd.cbday_roll
+      
+      
+        ~CustomBusinessMonthEnd.freqstr
+      
+      
+        ~CustomBusinessMonthEnd.holidays
+      
+      
+        ~CustomBusinessMonthEnd.kwds
+      
+      
+        ~CustomBusinessMonthEnd.m_offset
+      
+      
+        ~CustomBusinessMonthEnd.month_roll
+      
+      
+        ~CustomBusinessMonthEnd.n
+      
+      
+        ~CustomBusinessMonthEnd.name
+      
+      
+        ~CustomBusinessMonthEnd.nanos
+      
+      
+        ~CustomBusinessMonthEnd.normalize
+      
+      
+        ~CustomBusinessMonthEnd.offset
+      
+      
+        ~CustomBusinessMonthEnd.rule_code
+      
+      
+        ~CustomBusinessMonthEnd.weekmask
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~CustomBusinessMonthEnd.copy
+      
+      
+        ~CustomBusinessMonthEnd.is_anchored
+      
+      
+        ~CustomBusinessMonthEnd.is_month_end
+      
+      
+        ~CustomBusinessMonthEnd.is_month_start
+      
+      
+        ~CustomBusinessMonthEnd.is_on_offset
+      
+      
+        ~CustomBusinessMonthEnd.is_quarter_end
+      
+      
+        ~CustomBusinessMonthEnd.is_quarter_start
+      
+      
+        ~CustomBusinessMonthEnd.is_year_end
+      
+      
+        ~CustomBusinessMonthEnd.is_year_start
+      
+      
+        ~CustomBusinessMonthEnd.rollback
+      
+      
+        ~CustomBusinessMonthEnd.rollforward
+      
+   
+   

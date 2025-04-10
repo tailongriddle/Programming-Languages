@@ -1,0 +1,86 @@
+pandas.tseries.offsets.QuarterBegin
+===================================
+
+.. currentmodule:: pandas.tseries.offsets
+
+.. autoclass:: QuarterBegin
+
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      
+        ~QuarterBegin.base
+      
+      
+        ~QuarterBegin.freqstr
+      
+      
+        ~QuarterBegin.kwds
+      
+      
+        ~QuarterBegin.n
+      
+      
+        ~QuarterBegin.name
+      
+      
+        ~QuarterBegin.nanos
+      
+      
+        ~QuarterBegin.normalize
+      
+      
+        ~QuarterBegin.rule_code
+      
+      
+        ~QuarterBegin.startingMonth
+      
+   
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+        ~QuarterBegin.copy
+      
+      
+        ~QuarterBegin.is_anchored
+      
+      
+        ~QuarterBegin.is_month_end
+      
+      
+        ~QuarterBegin.is_month_start
+      
+      
+        ~QuarterBegin.is_on_offset
+      
+      
+        ~QuarterBegin.is_quarter_end
+      
+      
+        ~QuarterBegin.is_quarter_start
+      
+      
+        ~QuarterBegin.is_year_end
+      
+      
+        ~QuarterBegin.is_year_start
+      
+      
+        ~QuarterBegin.rollback
+      
+      
+        ~QuarterBegin.rollforward
+      
+   
+   
