@@ -32,3 +32,21 @@ cabal.project.local
 cabal.project.local~
 .HTF/
 .ghc.environment.*
+.DS_Store
+.editorconfig
+.gitignore
+.vscode/
+DiscreteStructures/
+Intro to AI/
+IntroCSII/
+Local/
+README.md
+Sage_macOS-2.5.0/
+Systems.code-workspace
+Systems/
+Systems2/
+_Projects/
+learning_progress.png
+pandas.zip
+pandas/
+public_html/
