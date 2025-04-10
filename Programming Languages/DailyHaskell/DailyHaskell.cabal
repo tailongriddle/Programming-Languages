@@ -25,6 +25,7 @@ source-repository head
 library
   exposed-modules:
       DailyOne
+      DailyTwo
       Lib
   other-modules:
       Paths_DailyHaskell
@@ -105,6 +106,7 @@ test-suite DailyHaskell-test
   main-is: Spec.hs
   other-modules:
       DailyOneSpec
+      DailyTwoSpec
       Paths_DailyHaskell
   hs-source-dirs:
       test
