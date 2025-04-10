@@ -52,8 +52,8 @@ toSetList (a:as) = if inList a as == True
 -- return: true or false if item is in list
 inList :: Eq a => a -> [a] -> Bool
 inList _ [] = False
-inList item (a:as) = if item == a -- if item in list
+inList item (a:as) = if item == a -- if item is same as current element
     then 
         True    
     else 
-        inList item as
+        inList item as -- check rest of elements

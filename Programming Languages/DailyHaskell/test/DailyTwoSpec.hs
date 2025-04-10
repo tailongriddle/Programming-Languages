@@ -71,7 +71,7 @@ spec = do
       it "should be [\"meowoo\",\"meeeowoo\",\"mrrowoo\"]" $
         (appendToEach "oo" ["meow", "meeeow", "mrrow"]) `shouldBe` ["meowoo", "meeeowoo", "mrrowoo"]
 
-    context "appendToEach \"\" []" $ -- ALL EMPTY TEST
+    context "appendToEach \"\" []" $ -- BOTH EMPTY TEST
       it "should be []" $
         (appendToEach "" []) `shouldBe` ([] :: [String])
 
