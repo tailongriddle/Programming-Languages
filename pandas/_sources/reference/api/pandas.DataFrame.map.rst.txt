@@ -1,6 +1,0 @@
-pandas.DataFrame.map
-====================
-
-.. currentmodule:: pandas
-
-.. automethod:: DataFrame.map

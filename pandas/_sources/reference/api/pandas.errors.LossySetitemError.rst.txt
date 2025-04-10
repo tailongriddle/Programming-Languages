@@ -1,6 +1,0 @@
-pandas.errors.LossySetitemError
-===============================
-
-.. currentmodule:: pandas.errors
-
-.. autoexception:: LossySetitemError

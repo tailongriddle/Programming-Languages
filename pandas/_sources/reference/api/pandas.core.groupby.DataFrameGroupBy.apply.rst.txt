@@ -1,6 +1,0 @@
-pandas.core.groupby.DataFrameGroupBy.apply
-==========================================
-
-.. currentmodule:: pandas.core.groupby
-
-.. automethod:: DataFrameGroupBy.apply

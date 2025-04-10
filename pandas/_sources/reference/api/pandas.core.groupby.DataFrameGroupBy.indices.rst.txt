@@ -1,6 +1,0 @@
-pandas.core.groupby.DataFrameGroupBy.indices
-============================================
-
-.. currentmodule:: pandas.core.groupby
-
-.. autoproperty:: DataFrameGroupBy.indices

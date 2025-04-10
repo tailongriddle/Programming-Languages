@@ -1,6 +1,0 @@
-pandas.IntervalIndex.is\_empty
-==============================
-
-.. currentmodule:: pandas
-
-.. autoproperty:: IntervalIndex.is_empty

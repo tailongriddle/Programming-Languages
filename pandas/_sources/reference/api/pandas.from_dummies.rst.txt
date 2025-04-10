@@ -1,6 +1,0 @@
-pandas.from\_dummies
-====================
-
-.. currentmodule:: pandas
-
-.. autofunction:: from_dummies

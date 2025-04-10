@@ -1,6 +1,0 @@
-pandas.core.groupby.SeriesGroupBy.take
-======================================
-
-.. currentmodule:: pandas.core.groupby
-
-.. automethod:: SeriesGroupBy.take

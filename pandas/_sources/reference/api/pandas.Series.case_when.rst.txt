@@ -1,6 +1,0 @@
-pandas.Series.case\_when
-========================
-
-.. currentmodule:: pandas
-
-.. automethod:: Series.case_when

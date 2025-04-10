@@ -1,6 +1,0 @@
-pandas.arrays.ArrowExtensionArray
-=================================
-
-.. currentmodule:: pandas.arrays
-
-.. autoclass:: ArrowExtensionArray

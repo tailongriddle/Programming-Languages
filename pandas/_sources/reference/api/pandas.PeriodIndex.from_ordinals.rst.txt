@@ -1,6 +1,0 @@
-pandas.PeriodIndex.from\_ordinals
-=================================
-
-.. currentmodule:: pandas
-
-.. automethod:: PeriodIndex.from_ordinals

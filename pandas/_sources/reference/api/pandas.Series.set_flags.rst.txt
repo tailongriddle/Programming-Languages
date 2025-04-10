@@ -1,6 +1,0 @@
-pandas.Series.set\_flags
-========================
-
-.. currentmodule:: pandas
-
-.. automethod:: Series.set_flags

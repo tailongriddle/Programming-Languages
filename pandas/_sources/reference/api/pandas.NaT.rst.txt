@@ -1,6 +1,0 @@
-pandas.NaT
-==========
-
-.. currentmodule:: pandas
-
-.. autoclass:: NaT

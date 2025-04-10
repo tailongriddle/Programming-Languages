@@ -1,6 +1,0 @@
-pandas.core.groupby.DataFrameGroupBy.first
-==========================================
-
-.. currentmodule:: pandas.core.groupby
-
-.. automethod:: DataFrameGroupBy.first

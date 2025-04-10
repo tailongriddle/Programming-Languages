@@ -1,6 +1,0 @@
-pandas.Series.dt.as_unit
-========================
-
-.. currentmodule:: pandas
-
-.. autoaccessormethod:: Series.dt.as_unit

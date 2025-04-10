@@ -1,6 +1,0 @@
-pandas.core.groupby.DataFrameGroupBy.transform
-==============================================
-
-.. currentmodule:: pandas.core.groupby
-
-.. automethod:: DataFrameGroupBy.transform

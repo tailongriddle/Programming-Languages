@@ -1,6 +1,0 @@
-pandas.MultiIndex.dtypes
-========================
-
-.. currentmodule:: pandas
-
-.. autoattribute:: MultiIndex.dtypes

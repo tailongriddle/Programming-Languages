@@ -1,6 +1,0 @@
-pandas.Timestamp.day\_name
-==========================
-
-.. currentmodule:: pandas
-
-.. automethod:: Timestamp.day_name

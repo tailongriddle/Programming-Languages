@@ -1,6 +1,0 @@
-pandas.core.groupby.DataFrameGroupBy.cumcount
-=============================================
-
-.. currentmodule:: pandas.core.groupby
-
-.. automethod:: DataFrameGroupBy.cumcount
