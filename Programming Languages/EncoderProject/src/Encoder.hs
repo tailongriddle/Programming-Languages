@@ -19,7 +19,7 @@ removeChar string (a:as) = if string == a
 -- calls removeChar for all whitespace characters in a given string by composition
 -- return: string with no instances of whitespaces
 removeWhitespace :: String -> String
-removeWhitespace = removeChar ' '  . removeChar '\t'  . removeChar '\n' . removeChar '\t' . removeChar '\r' 
+removeWhitespace = removeChar ' '  . removeChar '\n' . removeChar '\t' . removeChar '\r' 
 
 -- F3: removePunctuation -- 
 -- type: String -> String

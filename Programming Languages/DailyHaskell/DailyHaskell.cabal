@@ -25,6 +25,7 @@ library
   exposed-modules:
       DailyOne
       DailyTwo
+      DailyThree
       Lib
   other-modules:
       Paths_DailyHaskell
@@ -106,6 +107,7 @@ test-suite DailyHaskell-test
   other-modules:
       DailyOneSpec
       DailyTwoSpec
+      DailyThreeSpec
       Paths_DailyHaskell
   hs-source-dirs:
       test
