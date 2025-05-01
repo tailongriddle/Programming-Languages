@@ -10,4 +10,8 @@ class Payroll():
     def addEmp(self, e):
         self.emp.append(e)
 
-    
+    def total(self):
+        total = 0
+        for e in self.emp:
+            total = total + e.getPay()   
+        return total

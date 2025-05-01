@@ -11,4 +11,9 @@ pr.addEmp(Employee("Carol", "Danvers", 150000))
 
 print(pr)
 
+if pr.total() == 75000 + 120000 + 100000 + 140000 + 150000:
+    print("CORRECT TOTAL SUM: ", pr.total())
+else:
+    print("INCORRECT TOTAL SUM: ", pr.total())
+
 
