@@ -40,7 +40,7 @@ class VecT a where
 
 -- Q7 --
 instance VecT Vec where -- defines magnitiude
-   magnitude (Vec xs) = sqrt (foldl (\acc x -> acc + x^2) 0 xs) -- magnitude of a vector
+   magnitude (Vec xs) = sqrt (sum (map (^2) xs)) -- magnitude of a vector
 
 -- Q8 --
 instance Semigroup Vec where -- semigroup with addition
