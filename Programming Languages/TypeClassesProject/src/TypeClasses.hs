@@ -5,6 +5,7 @@ module TypeClasses where
 
 -- Q1 --
 data Vec = Vec [Double] -- defines new type Vec, contains list of Doubles
+
 -- Q2 --
 instance Show Vec where
    show (Vec xs) = "Vec " ++ show xs -- converts the vector to a string representation
@@ -27,11 +28,10 @@ instance Eq Vec where
 
 -- Q5 --
 instance Ord Vec where
-   (Vec xs) >= (Vec ys) = sum xs >= sum ys -- compares sum of two vectors
-   compare (Vec xs) (Vec ys) = compare (sum xs) (sum ys) -- compares two vectors based on sum
-   min (Vec xs) (Vec ys) = if sum xs < sum ys then Vec xs else Vec ys -- returns vector with smaller sum
-   max (Vec xs) (Vec ys) = if sum xs > sum ys then Vec xs else Vec ys -- returns vector with larger sum
-
+   (Vec xs) >= (Vec ys) = foldr (+) 0 xs >= foldr (+) 0 ys -- compares sum of two vectors
+   compare (Vec xs) (Vec ys) = compare (foldr (+) 0 xs) (foldr (+) 0 ys) -- compares two vectors based on sum
+   min (Vec xs) (Vec ys) = if foldr (+) 0 xs < foldr (+) 0 ys then Vec xs else Vec ys -- returns vector with smaller sum
+   max (Vec xs) (Vec ys) = if foldr (+) 0 xs > foldr (+) 0 ys then Vec xs else Vec ys -- returns vector with larger sum
 
 -- Q6 --
 class VecT a where
@@ -40,8 +40,7 @@ class VecT a where
 
 -- Q7 --
 instance VecT Vec where -- defines magnitiude
-   magnitude (Vec xs) = sqrt (sum (map (^2) xs)) --  magnitude of a vector
-
+   magnitude (Vec xs) = sqrt (foldl (\acc x -> acc + x^2) 0 xs) -- magnitude of a vector
 
 -- Q8 --
 instance Semigroup Vec where -- semigroup with addition
