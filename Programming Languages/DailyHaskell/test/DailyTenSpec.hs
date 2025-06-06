@@ -4,10 +4,11 @@ import Test.Hspec
 import DailyTen
 
 main :: IO ()
-main = hpsec spec ()
+main = hspec spec 
 
 spec :: Spec
 spec = do
+  
   describe "allLefts" $ do
     it "returns [] for an empty list" $
       allLefts ([] :: [Either String Int]) `shouldBe` []
@@ -37,10 +38,10 @@ spec = do
 
   describe "sumListOfEither" $ do
     it "returns Right 0 for an empty list" $
-      sumListOfEither [] `shouldBe` Right 0
+      sumListOfEither [] `shouldBe` (Right 0 :: Either String Integer)
 
     it "returns the sum for a list of only Right values" $
-      sumListOfEither [Right 1, Right 2, Right 3] `shouldBe` Right 6
+      sumListOfEither [Right 1, Right 2, Right 3] `shouldBe` (Right 6 :: Either String Integer)
 
     it "returns the first Left if it appears at the start" $
       sumListOfEither [Left "err", Right 2, Right 3] `shouldBe` Left "err"
