@@ -3,6 +3,9 @@ module DailyTenSpec where
 import Test.Hspec
 import DailyTen
 
+main :: IO ()
+main hpsec spec ()
+
 spec :: Spec
 spec = do
   describe "allLefts" $ do
