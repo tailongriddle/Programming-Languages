@@ -32,6 +32,7 @@ library
       DailySeven
       DailyEight
       DailyNine
+      DailyTen
       Lib
   other-modules:
       Paths_DailyHaskell
@@ -120,6 +121,7 @@ test-suite DailyHaskell-test
       DailySevenSpec
       DailyEightSpec
       DailyNineSpec
+      DailyTenSpec
       Paths_DailyHaskell
   hs-source-dirs:
       test
