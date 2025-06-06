@@ -4,7 +4,7 @@ import Test.Hspec
 import DailyTen
 
 main :: IO ()
-main hpsec spec ()
+main = hpsec spec ()
 
 spec :: Spec
 spec = do
