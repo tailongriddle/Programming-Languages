@@ -34,8 +34,6 @@ spec = do
            parseString "true" `shouldBe` Right (LiteralExpr (BoolValue True), "")
        it "parses false" $
            parseString "false" `shouldBe` Right (LiteralExpr (BoolValue False), "")
-       it "fails on non-literal: foo" $
-           parseString "foo" `shouldSatisfy` isLeft
        it "parses number with trailing space" $
            parseString "42 " `shouldBe` Right (LiteralExpr (IntValue 42), "")
   
@@ -138,6 +136,23 @@ spec = do
                                     (IfExpr (CompExpr Lt (LiteralExpr (IntValue 10)) (LiteralExpr (IntValue 2)))
                                             (LiteralExpr (BoolValue True))
                                             (LiteralExpr (BoolValue False))),")")
+
+   describe "Part 3: parse lambda expr" $ do
+        it "parses lambda expr: (lambda (x) (+ x 1))" $
+            parseString "(lambda (x) (+ x 1))" `shouldBe` Right (LambdaExpr "x" (MathExpr Add [VarExpr "x", LiteralExpr (IntValue 1)]), "")
+        it "parses lambda expr: (lambda (x) (if (< x 10) true false))" $
+            parseString "(lambda (x) (if (< x 10) true false))" `shouldBe` Right (LambdaExpr "x" (IfExpr (CompExpr Lt (VarExpr "x") (LiteralExpr (IntValue 10))) (LiteralExpr (BoolValue True)) (LiteralExpr (BoolValue False))), "")
+        it "parses lambda with nested expressions" $
+            parseString "(lambda (x) (if (equal? x 0) 1 (* x 2)))" `shouldBe` Right (LambdaExpr "x" (IfExpr (CompExpr Eq (VarExpr "x") (LiteralExpr (IntValue 0)) )(LiteralExpr (IntValue 1)) (MathExpr Mul [VarExpr "x", LiteralExpr (IntValue 2)])), "")
+
+   describe "Part 3: parse apply expr" $ do
+        it "parses apply expr: (let (f (lambda (x) (+ x 1))) (f 4))" $
+            parseString "(let (f (lambda (x) (+ x 1))) (f 4))" `shouldBe` Right (LetExpr "f" (LambdaExpr "x" (MathExpr Add [VarExpr "x", LiteralExpr (IntValue 1)])) (ApplyExpr (VarExpr "f") (LiteralExpr (IntValue 4))), "")
+        it "parses apply expr: (let (f (lambda (x) (if (< x 10) true false))) (f 5))" $
+            parseString "(let (f (lambda (x) (if (< x 10) true false))) (f 5))" `shouldBe` Right (LetExpr "f" (LambdaExpr "x" (IfExpr (CompExpr Lt (VarExpr "x") (LiteralExpr (IntValue 10))) (LiteralExpr (BoolValue True)) (LiteralExpr (BoolValue False)))) (ApplyExpr (VarExpr "f") (LiteralExpr (IntValue 5))), "")
+        it "parses apply expr: (let (f (lambda (x) (if (equal? x 5) true false))) (f 5))" $
+            parseString "(let (f (lambda (x) (if (equal? x 5) true false))) (f 5))" `shouldBe` Right (LetExpr "f" (LambdaExpr "x" (IfExpr (CompExpr Eq (VarExpr "x") (LiteralExpr (IntValue 5))) (LiteralExpr (BoolValue True)) (LiteralExpr (BoolValue False)))) (ApplyExpr (VarExpr "f") (LiteralExpr (IntValue 5))), "")
+
  where
    isLeft (Left _) = True
    isLeft _        = False

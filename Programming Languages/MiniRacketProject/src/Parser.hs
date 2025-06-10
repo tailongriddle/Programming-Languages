@@ -239,8 +239,6 @@ int = do
     -- otherwise, just parse an integer
     nat 
 
--- parse int "-35"
--- parse int "35"
 
 -- since most languages allow spacing freely, we will write a parser
 -- that consumes space before and after a function 

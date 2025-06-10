@@ -89,6 +89,31 @@ spec = do
             evalString "(let (x (+ 1 5)) (if (< 10 2) true false)))" `shouldBe` Right (BoolValue False)
 
 
+   describe "P3: evale lambda expr" $ do   
+        it "evaluates lambda expr: ((lambda (x) (+ x 1)) 4)" $
+            evalString "((lambda (x) (+ x 1)) 4)" `shouldBe` Right (IntValue 5)
+        it "evaluates lambda expr: ((lambda (x) (if (< x 10) true false)) 12)" $
+            evalString "((lambda (x) (if (< x 10) true false)) 12)" `shouldBe` Right (BoolValue False)
+        it "evaluates lambda expr: ((lambda (x) (if (< x 10) true false)) 4)" $
+            evalString "((lambda (x) (if (< x 10) true false)) 4)" `shouldBe` Right (BoolValue True)
+        it "evaluates lambda expr: ((lambda (x) (* x 2)) 5)" $
+            evalString "((lambda (x) (* x 2)) 5)" `shouldBe` Right (IntValue 10)
+        it "evaluates nested lambda expr: (lambda (x) (if (equal? x 0) 1 (* x 2)))" $
+            evalString "((lambda (x) (if (equal? x 0) 1 (* x 2))) 5)" `shouldBe` Right (IntValue 10)
+        it "evaluates nested lambda expr: (lambda (x) (if (equal? x 0) 1 (* x 2)))" $
+            evalString "((lambda (x) (if (equal? x 0) 1 (* x 2))) 0)" `shouldBe` Right (IntValue 1)
+
+   describe "P3: eval apply expr" $ do
+        it "evaluates apply expr: (let f (lambda (x) (+ x 1)) (f 4))" $
+            evalString "(let (f (lambda (x) (+ x 1))) (f 4))" `shouldBe` Right (IntValue 5)
+        it "evaluates apply expr: (let (f (lambda (x) (if (< x 10) true false))) (f 5))" $
+            evalString "(let (f (lambda (x) (if (< x 10) true false))) (f 5))" `shouldBe` Right (BoolValue True)
+        it "evaluates apply expr: (let (f (lambda (x) (if (equal? x 5) true false))) (f 5))" $
+            evalString "(let (f (lambda (x) (if (equal? x 5) true false))) (f 5))" `shouldBe` Right (BoolValue True)
+        it "evaluates apply expr: (let (f (lambda (x) (if (equal? x 5) true false))) (f 6))" $
+            evalString "(let (f (lambda (x) (if (equal? x 5) true false))) (f 6))" `shouldBe` Right (BoolValue False)
+
+
   where
    isLeft (Left _) = True
    isLeft _        = False

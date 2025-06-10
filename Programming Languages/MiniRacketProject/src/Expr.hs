@@ -21,21 +21,25 @@ data CompOp =
           Eq 
         | Lt 
         | Gt
+        | Le
+        | Ge
         deriving (Show, Eq)
 
--- define the expression types PT 2
+-- define the expression types
 data Expr = 
       BoolExpr BoolOp [Expr]
-    | NotExpr Expr   
+    | NotExpr Expr
     | MathExpr MathOp [Expr] 
     | CompExpr CompOp Expr Expr
-    | VarExpr String 
-    | LiteralExpr Value
+    | VarExpr String
+    | LiteralExpr Value 
+    | LambdaExpr String Expr
     | IfExpr Expr Expr Expr
+    | ApplyExpr Expr Expr
     | LetExpr String Expr Expr
     | PairExpr Expr Expr 
-    | EmptyExpr 
     | NegateExpr Expr
+    | EmptyExpr 
     deriving (Show, Eq)
 
 -- define the type for values, in the mini racket language
