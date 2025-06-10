@@ -74,6 +74,21 @@ spec = do
                 `shouldBe` Right (IntValue 12)
 
 
+   describe "P2: eval if expr" $ do
+        it "evaluates if expr: if true 1 2" $
+            evalString "(if true 1 2)" `shouldBe` Right (IntValue 1)
+        it "evaluates if expr: if false 1 2" $
+            evalString "(if false 1 2)" `shouldBe` Right (IntValue 2)
+        it "evaluates if expr: if (or true false) (and true false) (or true false)" $
+            evalString "(if (or true false) (and true false) (or true false))" `shouldBe` Right (BoolValue False)
+
+   describe "P2: eval let expr" $ do
+        it "evaluates let expr: let (x 5) 5" $
+            evalString "(let (x 5) 5)" `shouldBe` Right (IntValue 5)
+        it "evaluates let expr: let (x (+ 1 5)) (if (< 10 2) true false))" $
+            evalString "(let (x (+ 1 5)) (if (< 10 2) true false)))" `shouldBe` Right (BoolValue False)
+
+
   where
    isLeft (Left _) = True
    isLeft _        = False

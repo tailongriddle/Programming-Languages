@@ -308,7 +308,10 @@ evalPairExpr = do
 -- TODO: Add evaluations for each newly added expression type here
 evalExpr :: Evaluator Value
 evalExpr =
-   evalBoolExpr
+   evalLetExpr
+   <|> evalIfExpr
+   <|> evalVar
+   <|> evalBoolExpr
    <|> evalMathExpr
    <|> evalCompExpr
    <|> evalNotExpr
@@ -339,3 +342,54 @@ evalString :: String -> Either ErrorType Value
 evalString = getValue . parseAndEval
 
 
+-- TODO: Add the following to Eval.hs for Part 2 of the MiniRacketProject
+-- Beginning of additions to Eval.hs for Part 2 of the MiniRacketProject
+-- TODO: Add this to your Eval.hs file
+-- Evaluate a let expression. This requires evaluating the
+-- argument to the identifier. Once that is evaluated, we
+-- bind the value to the name in a new environment, then
+-- we evaluated the body with this new environment
+evalLetExpr :: Evaluator Value
+evalLetExpr = do
+    (env, LetExpr name expr body) <- next
+    case eval evalExpr (env, expr) of
+        Right (val, _) -> 
+            let newEnv = bindName name val env
+            in
+            case eval evalExpr (newEnv, body) of
+                Right (res, _) -> return res
+                Left err -> evalError err
+        Left err -> evalError err 
+    --evalLiteral
+-- TODO: Implement evalIfExpr
+-- Evaluate an if expression, this requires evaluating
+-- the first expression in the if, which is the predicate (boolean value).
+-- Only until this returns a value should you evaluate one
+-- of the branches. You should NOT evaluate both branches,
+-- just the 2nd expression if the test case returns true,
+-- and the 3rd expression if the test case returns false
+evalIfExpr :: Evaluator Value
+evalIfExpr = do
+    (env, IfExpr cond ifResult elseResult) <- next
+    case eval evalExpr (env, cond) of
+        Right (BoolValue True, _) -> 
+            case eval evalExpr (env, ifResult) of
+                Right (res, _) -> return res
+                Left err -> evalError err
+        Right (BoolValue False, _) -> 
+            case eval evalExpr (env, elseResult) of
+                Right (res, _) -> return res
+                Left err -> evalError err
+        Left _ -> typeError "if condition should return boolean"
+-- TODO: implement evaluating a Var
+-- Evaluate a Var, this requires looking up the symbol
+-- in the current environment. If it's there, we return
+-- the value. If it's not, we generate a NoSymbol error
+-- via: noSymbol $ "symbol " ++ name ++ " not found"
+evalVar :: Evaluator Value
+evalVar = do
+    (env, VarExpr name) <- next
+    case Environment.lookup name env of
+        Just val -> return val
+        Nothing -> noSymbol $ "symbol " ++ name ++ " not found"
+-- End of additions to Eval.hs for Part 2 of the MiniRacketProject

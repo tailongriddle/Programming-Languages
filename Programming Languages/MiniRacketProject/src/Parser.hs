@@ -151,13 +151,6 @@ satisfies p = do
         then return x 
         else failParse (show x ++ " didn't match expected character")
 
-satisfiesNoParse :: (Char -> Bool) -> Parser Char
-satisfiesNoParse p = do
-    x <- item
-    if p x
-        then return x
-        else noParse
-
 digit :: Parser Char 
 digit = satisfies isDigit
 
@@ -165,7 +158,7 @@ upper :: Parser Char
 upper = satisfies isUpper
 
 lower :: Parser Char 
-lower = satisfiesNoParse isLower
+lower = satisfies isLower
 
 letter :: Parser Char 
 letter = satisfies isAlpha 
@@ -216,7 +209,7 @@ oneOrMore = kleenePlus
 ident :: Parser String
 ident = do
   x <- lower
-  xs <- zeroOrMore (satisfies (\c -> isAlphaNum c || c `elem` ("?-!*/" :: [Char])))
+  xs <- zeroOrMore (satisfies (\c -> isAlphaNum c || c `elem` ("?-!*/<>=" :: [Char])))
   return (x:xs)
 -- parse ident "abc def"
 

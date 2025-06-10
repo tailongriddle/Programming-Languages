@@ -100,6 +100,44 @@ spec = do
         it "parses nested math: (* (- 5 2) (div 8 2))" $
             parseString "(* (- 5 2) (div 8 2))"
                 `shouldBe` Right (MathExpr Mul [MathExpr Sub [LiteralExpr (IntValue 5), LiteralExpr (IntValue 2)], MathExpr Div [LiteralExpr (IntValue 8), LiteralExpr (IntValue 2)]], "")
+   
+   describe "P2: parse negate atom" $ do
+        it "parses negate atom: -x" $
+            parseString "(-x)" `shouldBe` Right (MathExpr Sub [VarExpr "x"],"")
+        it "parses negate atom: -test" $
+            parseString "(-test)" `shouldBe` Right (MathExpr Sub [VarExpr "test"],"")
+        it "parses negate atom: -name123" $
+            parseString "(-name123)" `shouldBe` Right (MathExpr Sub [VarExpr "name123"],"")
+
+   describe "P2: parse var expr" $ do
+        it "parses var expr: name123" $
+            parseString "(name123)" `shouldBe` Right (VarExpr "name123","")
+        it "parses var expr: x" $
+            parseString "(x)" `shouldBe` Right (VarExpr "x","")
+        it "parses var expr: test" $
+            parseString "(test)" `shouldBe` Right (VarExpr "test","")
+
+   describe "P2: parse if expr" $ do
+        it "parses if expr: if true 1 2" $
+            parseString "(if true 1 2)" `shouldBe` Right (IfExpr (LiteralExpr (BoolValue True)) (LiteralExpr (IntValue 1)) (LiteralExpr (IntValue 2)),"")
+        it "parses if expr: if false 1 2" $
+            parseString "(if false 1 2)" `shouldBe` Right (IfExpr (LiteralExpr (BoolValue False)) (LiteralExpr (IntValue 1)) (LiteralExpr (IntValue 2)),"")
+        it "parses if expr: if (or true false) (and true false) (or true false)" $
+            parseString "(if (or true false) (and true false) (or true false))"
+                `shouldBe` Right (IfExpr (BoolExpr Or [LiteralExpr (BoolValue True),LiteralExpr (BoolValue False)])
+                                         (BoolExpr And [LiteralExpr (BoolValue True),LiteralExpr (BoolValue False)])
+                                         (BoolExpr Or [LiteralExpr (BoolValue True),LiteralExpr (BoolValue False)]),"")
+
+   describe "P2: parse let expr" $ do
+        it "parses let expr: let (x 5) 5" $
+            parseString "(let (x 5) 5)" `shouldBe` Right (LetExpr "x" (LiteralExpr (IntValue 5)) (LiteralExpr (IntValue 5)),"")
+        it "parses let expr: let (x (+ 1 5)) (if (< 10 2) true false))" $
+            parseString "(let (x (+ 1 5)) (if (< 10 2) true false)))"
+                `shouldBe` Right (LetExpr "x"
+                                    (MathExpr Add [LiteralExpr (IntValue 1),LiteralExpr (IntValue 5)])
+                                    (IfExpr (CompExpr Lt (LiteralExpr (IntValue 10)) (LiteralExpr (IntValue 2)))
+                                            (LiteralExpr (BoolValue True))
+                                            (LiteralExpr (BoolValue False))),")")
  where
    isLeft (Left _) = True
    isLeft _        = False
